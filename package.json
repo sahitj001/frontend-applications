@@ -1,0 +1,27 @@
+{
+  "name": "frontend-applications",
+  "version": "1.0.0",
+  "description": "Front-end applications course by the Amsterdam University of Applied Sciences",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sahitj001/frontend-applications.git"
+  },
+  "keywords": [
+    "node.js",
+    "react",
+    "d3"
+  ],
+  "author": "Jordy S",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sahitj001/frontend-applications/issues"
+  },
+  "homepage": "https://github.com/sahitj001/frontend-applications#readme",
+  "dependencies": {
+    "create-react-app": "^4.0.0"
+  }
+}

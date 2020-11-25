@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+
+const provinces = [{value:'groningen', name: 'Groningen'}, {value:'noord-holland', name: 'Noord-Holland'}]
+
+for (let i = 0; i < provinces.length; i++) {
+  const createEl = document.createElement("option")
+  document.getElementById("province").innerHTML += ' <option value=" '+ pronvince[i].value + '">' + provinces[i].name + '</option'
+  
+}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <select id="province">
+        
+      </select>
     </div>
   );
 }
