@@ -1,6 +1,7 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "frontend-applications",
+	"version": "0.1.0",
+	"description": "Front-end applications course by the Amsterdam University of Applied Sciences",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.6",
@@ -16,6 +17,20 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+	},
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/sahitj001/frontend-applications.git"
+	},
+	"keywords": [
+    "node.js",
+    "react",
+    "d3"
+	],
+	"author": "Jordy S",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sahitj001/frontend-applications/issues"
   },
   "eslintConfig": {
     "extends": [
