@@ -8,25 +8,17 @@ function App() {
 
 const choices = [{value:'gemiddelde', name: 'Het gemiddelde'}, {value:'totaal', name: 'Totaal aantal'}, {value:'max', name:'Hoogste capaciteit parkeergarage'}]
 
-const url = 'https://gist.githubusercontent.com/sahitj001/ff71b2e2e97c9fc07a6044680ba00a56/raw/742228f0dccb368d6b0bc8102ef94adc08c318c5/parkingData.json'
+const url = 'https://gist.githubusercontent.com/sahitj001/26850a99179af9f089a879f00cc7daad/raw/d276697fc13e60c07f2bec4078da9148f74dcf79/parkingData.json'
 
 const [data, setData] = useState([])
 const [choice, setChoice] = useState("gemiddelde")
-
+console.log(choice)
 useEffect(() => {
-  function filterIt(x){
-    if(x.hasOwnProperty('capacity') && x.hasOwnProperty('province')){
-      return x
-    }
-  }
-  
   // fetching the data from github
   const getData = async () => {
     try {
       const data = await d3.json(url)
-
-      //filtering the objects that don't have a capacity
-      const filteredData = data.filter(filterIt)
+      const filteredData = data
       setData(filteredData)
     } catch (error) {
       console.log(error)
@@ -38,6 +30,8 @@ useEffect(() => {
     getData()
   }
 })
+
+  
 
   return (
     <div className="App">

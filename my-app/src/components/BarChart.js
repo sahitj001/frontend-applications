@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as d3 from "d3";
+import * as d3collection from "d3-collection";
 
 //playing around with data: https://www.youtube.com/watch?v=BDpBAFvdjYo
 //also playing around with mouseover: http://bl.ocks.org/mbostock/2706022
@@ -62,11 +63,30 @@ function handleMouseOut(e, barValue) {
   // d3.select("bar-" + barValue.province).remove();  // Remove text location
 }
 
+
+
 export function BarChart(props) {
   //because i already gave my data array as a prop, i can use it here directly for my d3 bar chart
-  const { data, selectedProvince } = props;
-  
+  const { data, selectedChoice } = props;
+  var test = d3.group(data, d => d.province)
+  console.log(test)
   console.log('bruh', props.data.length)
+  console.log(selectedChoice)
+
+  const pls = d3collection.nest().key(function(d){
+    return d.province})
+  .rollup(function(d){
+    return d3.sum(d, function(y){
+        return y.capacity
+    })
+}).entries(data)
+
+// .map(function(d){
+//     return { province: d.key, capacity: d.capacity}
+// })
+
+console.log(pls)
+
 
   const x = d3.scaleBand()
   .domain(d3.range(props.data.length))
@@ -112,10 +132,12 @@ const xAxis = (g) => {
       svg.node()
   })
 
+ 
+
   return (
     <div>
       <div className="chart info">
-        <p>province: {"selected province"}</p>
+        <p>province: { props.data.province }</p>
         <p>capacity: {"selected capacity"}</p>
       </div>
       <svg
