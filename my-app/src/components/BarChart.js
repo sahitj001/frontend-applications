@@ -73,24 +73,47 @@ export function BarChart(props) {
   console.log('bruh', props.data.length)
   console.log(selectedChoice)
 
-  const pls = d3collection.nest().key(function(d){
+  function totalPerProvince(){
+  //http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html
+  //d3 collection is a deprecated package, but still working for me.
+  const total = d3collection.nest().key(function(d){
     return d.province})
   .rollup(function(d){
     return d3.sum(d, function(y){
         return y.capacity
     })
 }).entries(data)
+console.log(total)
+  }
 
-// .map(function(d){
-//     return { province: d.key, capacity: d.capacity}
-// })
+  function averagePerProvince(){
+    const total = d3collection.nest().key(function(d){
+      return d.province})
+    .rollup(function(d){
+      return d3.mean(d.filter(d => d.province === d.province), d => d.capacity)
+  }).entries(data)
+  console.log(total)
+  }
 
-console.log(pls)
+  function highestPerProvince(){
+    const total = d3collection.nest().key(function(d){
+      return d.province})
+    .rollup(function(d){
+      return d3.max(d.filter(d => d.province === d.province), d => d.capacity)
+  }).entries(data)
+  console.log(total)
+  }
+
+
+
+// const letsgo = d3.mean(data.filter(d => d.cap))
+// console.log('okay:', letsgo)
+
 
 
   const x = d3.scaleBand()
   .domain(d3.range(props.data.length))
-  .range([margin.left, sizes.width - margin.right ])
+  .range([margin.left, sizes.width - margin.right])
   .padding(0.1)
 
 const y = d3.scaleLinear()
