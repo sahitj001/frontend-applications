@@ -3,7 +3,6 @@ import * as d3 from "d3"
 import { BarChart } from './components/BarChart'
 import './App.css'
 
-
 function App() {
 
 const choices = [ {value:'totaal', name: 'Totaal aantal'}, {value:'gemiddelde', name: 'Het gemiddelde'}, {value:'max', name:'Hoogste capaciteit parkeergarage'}]
@@ -30,8 +29,6 @@ useEffect(() => {
     getData()
   }
 })
-
-  
 
   return (
     <div className="App">
