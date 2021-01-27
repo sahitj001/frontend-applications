@@ -1,0 +1,19 @@
+g > text {
+    
+    margin: 1em;
+}
+
+.tick > text{
+    margin-top:1em;
+
+}
+
+svg{
+    height:80%;
+    
+}
+
+#tooltip{
+    opacity: 0;
+    background-color:grey;
+}
