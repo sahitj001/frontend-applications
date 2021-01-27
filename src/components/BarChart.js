@@ -1,6 +1,5 @@
 import React, {
-  useEffect,
-  componentDidUpdate
+  useEffect
 } from "react";
 import * as d3 from "d3";
 import * as d3collection from "d3-collection";
@@ -15,9 +14,7 @@ import '../style/BarChart.css'
 
 const margin = {
   top: 50,
-  bottom: 50,
   left: 50,
-  right: 50,
 }
 
 function handleMouseOver(e, barValue) {
@@ -25,7 +22,6 @@ function handleMouseOver(e, barValue) {
   const value = barValue
   const bar = d3.select(this)
     .attr("fill", "orange")
-  return value
 }
 
 function handleMouseOut(e, barValue) {
@@ -33,6 +29,9 @@ function handleMouseOut(e, barValue) {
   const el = e.target;
   const bar = d3.select(this)
     .attr("fill", "royalblue")
+
+    d3.select("#capacity").html(barValue.value)
+    d3.select("#province").html(barValue.key)
 }
 
 const sizes = {
@@ -43,8 +42,8 @@ const sizes = {
 export function BarChart(props) {
   //select svg tag in HTML
   const svg = d3.select('#svg')
-    //give it a width and height
-    .attr('width', 2500)
+    //give the container a width and height
+    .attr('width', 1000)
     .attr('height', 1500)
   const x = d3.scaleBand()
   const y = d3.scaleLinear()
@@ -237,14 +236,14 @@ export function BarChart(props) {
   }
 
   useEffect(() => {
-    checkState()
+   checkState() 
   })
- 
+  
   return (
     <div>
       <div className="chart info">
-        <p>province: { handleMouseOver }</p>
-        <p>capacity: {"selected capacity"}</p>
+        <p>province: <span id="province"> Selected province </span></p>
+        <p>capacity: <span id="capacity"> Selected capacity </span></p>
       </div>
       <svg
         id="svg"

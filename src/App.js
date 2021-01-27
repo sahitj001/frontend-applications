@@ -23,7 +23,7 @@ useEffect(() => {
       console.log(error)
     }
   }
-
+  // when component has been mounted, useEffect will run once. Although, every time there is a change on the page, useEffect will run once more and then also keep fetching data.
   // the if statement is here so that useEffect won't keep re-fetching the data from github
   if (data.length === 0) {
     getData()
@@ -37,7 +37,6 @@ useEffect(() => {
             <option key={choice.value} value={choice.value}>{choice.name}</option>
           ))}
         </select>
-
         <BarChart data={data} selectedChoice={choice} />
     </div>
   )
