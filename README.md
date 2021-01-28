@@ -32,6 +32,9 @@ To run this project:
 npm run start
 ```
 
+## Live link of the project
+[Live link of the project](https://relaxed-panini-67bcc0.netlify.app/)
+
 ## Credits and License
 Shoutout to Sam and Ralf for helping me out here and there.
 This project has a MIT license.
