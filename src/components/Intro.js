@@ -7,8 +7,10 @@ export function Intro() {
 
             <div className="info-concept">
                 <h2 className="info-h2">Why this concept?</h2>
-                <p className="info-p">The reason for this concept is that I have no idea how many parking garages there are in the Netherlands. I know for example that in Amsterdam, 
-                    there are a lot of parking garages because it is a busy city. But is there aside from it being a busy city another reason to have a lot of parking garages?
+                <p className="info-p">De volkskrant gave me the task to make an interesting datavisualisation. The subject I had to focus on is: 'the car in the city'.
+                    The reason that I chose this concept is that I had no idea how many parking garages there are in the Netherlands. I know for example that in Amsterdam, 
+                    there are a lot of parking garages because it is a busy city. But is there aside from it being a busy city another reason to have a lot of parking garages? 
+                    This question gave me the inspiration to focus on this concept and try to get interesting insights out of it.
                     I want to widen the scope and find out if there are any more relations per province.</p>
             </div>
 
