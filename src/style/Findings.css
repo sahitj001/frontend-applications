@@ -1,0 +1,33 @@
+.container-findings{
+    background-color: #faf8ff;
+    height:110vh;
+    display:flex;
+    flex-direction: column;
+}
+
+.finding1{
+    margin-top:2em;
+    position: relative;
+    width: 100%;
+    max-width:600px;
+    left:15em;
+    background-color: #333333;
+    padding: 1em 2em 1em 2em;
+    border-radius: 25px 10px 25px 10px;
+}
+
+.finding2{
+    margin-top:2em;
+    position: relative;
+    width: 100%;
+    max-width:600px;
+    left:65em;
+    background-color: #333333;
+    padding: 1em 2em 1em 2em;
+    border-radius: 25px 10px 25px 10px;
+}
+
+.header-findings{
+    margin-top:3em;
+    color:#333333;
+}

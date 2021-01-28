@@ -1,0 +1,10 @@
+.container-filterTitle{
+    display:flex;
+    justify-content: center;
+    color:#faf8ff;
+    background-color: #333333;
+}
+
+.header-filterTitle{
+    margin-top:3em;
+}

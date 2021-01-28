@@ -1,0 +1,38 @@
+.container-intro{
+    background-color: #faf8ff;
+    height:60vh;
+    display:flex;
+    flex-direction: column;
+}
+
+.info-concept{
+    margin-top:2em;
+    position: relative;
+    width: 100%;
+    max-width:600px;
+    left:10em;
+    background-color: #333333;
+    padding: 1em 2em 1em 2em;
+    border-radius: 10px 25px 10px 25px;
+}
+
+.info-dataset{
+    margin-top: 3em;
+    position: relative;
+    width: 100%;
+    max-width:600px;
+    left:75em;
+    background-color: #333333;
+    padding: 1em 2em 1em 2em;
+    border-radius: 10px 25px 10px 25px;
+}
+
+.info-h2{
+    color:#faf8ff;
+    text-align: start;
+}
+
+.info-p{
+    color:#faf8ff;
+    text-align: start;
+}

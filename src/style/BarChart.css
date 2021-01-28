@@ -1,19 +1,51 @@
 g > text {
-    
-    margin: 1em;
+    color:#faf8ff;
+    /* margin: 1em; */
 }
 
+.bar-p{
+    margin: 0.5em;
+    color:#faf8ff;
+}
+
+.bar-h2{
+    color:#faf8ff;
+}
+
+.chart{
+    background-color:#333333;
+}
+
+.chart-info{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+ 
+}
 .tick > text{
-    margin-top:1em;
+    font-size:1em;
+    color:white;
 
 }
 
-svg{
-    height:80%;
-    
+.infoCap{
+    position: absolute;
+    color:#faf8ff;
+    /* left: 20vw;
+    top: 325vh; */
+    transform: rotate(270deg) translate(-350%, 1500%);
 }
 
-#tooltip{
-    opacity: 0;
-    background-color:grey;
+.infoProv{
+    position: absolute;
+    color:#faf8ff;
+    transform: translate(1900%, 2050%);
+}
+
+.xAxis{
+    color:royalblue;
+}
+.yAxis{
+    color:royalblue;
 }

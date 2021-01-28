@@ -28,7 +28,7 @@ function handleMouseOut(e, barValue) {
   console.log("mouse out", e, barValue)
   const el = e.target;
   const bar = d3.select(this)
-    .attr("fill", "royalblue")
+    .attr("fill", "white")
 
     d3.select("#capacity").html(barValue.value)
     d3.select("#province").html(barValue.key)
@@ -36,7 +36,7 @@ function handleMouseOut(e, barValue) {
 
 const sizes = {
   width: 900,
-  height: 700,
+  height: 500,
 }
 
 export function BarChart(props) {
@@ -44,7 +44,7 @@ export function BarChart(props) {
   const svg = d3.select('#svg')
     //give the container a width and height
     .attr('width', 1000)
-    .attr('height', 1500)
+    .attr('height', 900)
   const x = d3.scaleBand()
   const y = d3.scaleLinear()
 
@@ -67,7 +67,7 @@ export function BarChart(props) {
 
     theBars.enter()
       .append('rect')
-      .attr("fill", "royalblue")
+      .attr("fill", "white")
       .attr('class', 'bar')
       .attr('x', d => x(d.key))
       .attr('y', d => y(d.value))
@@ -221,11 +221,11 @@ export function BarChart(props) {
 
   function checkState() {
     initAxes(container)
-    if (selectedChoice === 'totaal') {
+    if (selectedChoice === 'total') {
       initScales(totalPerProvince())
       drawBars(container, totalPerProvince())
     }
-    if (selectedChoice === 'gemiddelde') {
+    if (selectedChoice === 'average') {
       initScales(averagePerProvince())
       drawBars(container, averagePerProvince())
     }
@@ -240,11 +240,13 @@ export function BarChart(props) {
   })
   
   return (
-    <div>
-      <div className="chart info">
-        <p>province: <span id="province"> Selected province </span></p>
-        <p>capacity: <span id="capacity"> Selected capacity </span></p>
+    <div className="chart">
+      <div className="chart-info">
+        <p className="bar-p">Province: <span id="province"> Hover over a bar! </span></p>
+        <p className="bar-p">Capacity: <span id="capacity"> Hover over a bar! </span></p>
       </div>
+        <h3 className="infoCap">Capacity</h3>
+        <h3 className="infoProv">Province</h3>
       <svg
         id="svg"
       ></svg>
