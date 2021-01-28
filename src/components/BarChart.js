@@ -23,17 +23,18 @@ function handleMouseOver(e, barValue) {
   const bar = d3.select(this)
     .attr("fill", "orange")
 }
-
+//when you hover away from the bar, show the data on screen. I also wanted to do this for mouseOver but the problem was that in the beginning I have
+//nothing selected so I will get an error when loading the page.
 function handleMouseOut(e, barValue) {
   console.log("mouse out", e, barValue)
   const el = e.target;
   const bar = d3.select(this)
     .attr("fill", "white")
 
-    d3.select("#capacity").html(barValue.value)
-    d3.select("#province").html(barValue.key)
+  d3.select("#capacity").html(barValue.value)
+  d3.select("#province").html(barValue.key)
 }
-
+//width and size of dataviz. i could for example say that the yAxis could be 200 high if i want to.
 const sizes = {
   width: 900,
   height: 500,
@@ -58,6 +59,7 @@ export function BarChart(props) {
 
   const container = svg
     .append('g')
+    //making sure labels show up by using this line code
     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
   function drawBars(container, data) {
@@ -83,11 +85,16 @@ export function BarChart(props) {
     x.padding(0.2)
     // set domain equal to the parking capacity 
     y.domain([0, d3.max(data.map(capacity => capacity.value))])
+
+    //range is the absolute value of your data. If my domain is for example at max 10 and my range is 1000 and 
+    //say that I have each value of domain evenly spread, that means that every step my range increases with 100. A domain value of 25 would give a range of 250.
     x.rangeRound([0, sizes.width])
     y.rangeRound([sizes.height, 0])
   }
 
+
   function initAxes(container) {
+    //make the Y and X axis in this function. Wanted to have this function run only once but couldn't find a way how to.
     container
       .append('g')
       .attr('class', 'xAxis')
@@ -97,30 +104,31 @@ export function BarChart(props) {
   }
 
   function totalPerProvince() {
-    
-    const total = d3collection.nest().key(function (d) {
+    //calculate the total capacity per province
+    const total = d3collection.nest().key(function (d) { //with .key you create for each unique element a key, so we should get 12 provinces
         return d.province
       })
-      .rollup(function (d) {
-        return d3.sum(d, function (y) {
+      .rollup(function (d) { //with .rollup you take all the individual values in each key
+        return d3.sum(d, function (y) { //and then sum them up
           return y.capacity
         })
-      }).entries(data)
-      .sort((a, b) => d3.descending(a.value, b.value))
-    x.domain(total.map(province => province.key))
-    y.domain([0, d3.max(total.map(capacity => capacity.value))])
+      }).entries(data) //the data we are using
+      .sort((a, b) => d3.descending(a.value, b.value)) //then sort data from high to low
+
 
     const theBars = svg.selectAll('.bar')
       .data(total)
-    //update
+
+    //updating the bars
     theBars
       .attr('x', d => x(d.key))
       .attr('y', d => y(d.value))
       .attr('width', x.bandwidth())
       .attr('height', d => sizes.height - y(d.value))
 
-    theBars.exit()
-      .remove()
+    //by updating the domain, you set up the scaling of your axes  
+    x.domain(total.map(province => province.key))
+    y.domain([0, d3.max(total.map(capacity => capacity.value))])
 
     //update the axes
     svg.select('.xAxis')
@@ -128,11 +136,15 @@ export function BarChart(props) {
       .attr('transform', 'translate(0,' + sizes.height + ')')
     svg.select('.yAxis')
       .call(d3.axisLeft(y).ticks(10))
+
+    theBars.exit()
+      .remove()
+
     return total
   }
 
   function averagePerProvince() {
-    console.log('gemiddelde is aangetikt')
+    //calculate average parking capacity of each province
     const average = d3collection.nest().key(function (d) {
         return d.province
       })
@@ -141,28 +153,19 @@ export function BarChart(props) {
       }).entries(data)
       .sort((a, b) => d3.descending(a.value, b.value))
 
-    x.domain(average.map(province => province.key))
-    y.domain([0, d3.max(average.map(capacity => capacity.value))])
-
     const theBars = svg.selectAll('.bar')
       .data(average)
 
+    //update bars
     theBars
       .attr('x', d => x(d.key))
       .attr('y', d => y(d.value))
       .attr('width', x.bandwidth())
       .attr('height', d => sizes.height - y(d.value))
 
-    theBars.enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('x', d => x(d.key))
-      .attr('y', d => y(d.value))
-      .attr('width', x.bandwidth())
-      .attr('height', d => sizes.height - y(d.value))
-
-    theBars.exit()
-      .remove()
+    //update domain, setting up the scaling of my axes
+    x.domain(average.map(province => province.key))
+    y.domain([0, d3.max(average.map(capacity => capacity.value))])
 
     //update axes
     svg.select('.xAxis')
@@ -171,11 +174,15 @@ export function BarChart(props) {
     svg.select('.yAxis')
       .call(d3.axisLeft(y).ticks(10))
 
+    theBars.exit()
+      .remove()
+
     return average
   }
 
 
   function highestPerProvince() {
+    //get the parking garage with the highest capacity per province
     const highest = d3collection.nest().key(function (d) {
         return d.province
       })
@@ -185,11 +192,9 @@ export function BarChart(props) {
       .sort((a, b) => d3.descending(a.value, b.value))
     console.log(highest)
 
-    x.domain(highest.map(province => province.key))
-    y.domain([0, d3.max(highest.map(capacity => capacity.value))])
-
     const theBars = svg.selectAll('.bar')
       .data(highest)
+
     //update bars
     theBars
       .attr('x', d => x(d.key))
@@ -197,17 +202,9 @@ export function BarChart(props) {
       .attr('width', x.bandwidth())
       .attr('height', d => sizes.height - y(d.value))
 
-    theBars.enter()
-      .append('rect')
-      .attr('class', 'bar')
-      .attr('x', d => x(d.key))
-      .attr('y', d => y(d.value))
-      .attr('width', x.bandwidth())
-      .attr('height', d => sizes.height - y(d.value))
-
-
-    theBars.exit()
-      .remove()
+    //update domain, setting up scaling for each axis
+    x.domain(highest.map(province => province.key))
+    y.domain([0, d3.max(highest.map(capacity => capacity.value))])
 
     //update axes
     svg.select('.xAxis')
@@ -216,10 +213,14 @@ export function BarChart(props) {
     svg.select('.yAxis')
       .call(d3.axisLeft(y).ticks(10))
 
+    theBars.exit()
+      .remove()
+
     return highest
   }
 
   function checkState() {
+    //when the state of the dropdown changes, the bar will render something different
     initAxes(container)
     if (selectedChoice === 'total') {
       initScales(totalPerProvince())
@@ -236,7 +237,7 @@ export function BarChart(props) {
   }
 
   useEffect(() => {
-   checkState() 
+    checkState()
   })
   
   return (

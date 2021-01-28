@@ -17,7 +17,7 @@ export function Findings() {
 
             <div className="finding2">
                 <h2 className="info-h2">Zuid-Holland has the most total parking spots per province by a large margin. But if you look at the
-                average you notice that it has almost as much average parking capacity as the 3 provinces under it. Why is that?</h2>
+                average you notice that it has almost as much average parking capacity as the 3 provinces under it. Is there any reason for that?</h2>
                 <p className="info-p">The reason that Zuid-Holland has way more parking garages than all the other provinces, is because of urban construction plans.
                 According to the government website of Zuid-Holland there were a lot of parking garages built because there is a 
                 municipal parking norm that has to be adhered. According to the parking norm, for each house that is built, there has to be a number

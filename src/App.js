@@ -21,8 +21,7 @@ useEffect(() => {
   const getData = async () => {
     try {
       const data = await d3.json(url)
-      const filteredData = data
-      setData(filteredData)
+      setData(data)
     } catch (error) {
       console.log(error)
     }
