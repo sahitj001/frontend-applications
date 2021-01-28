@@ -5,7 +5,7 @@ import { Header } from './components/Header'
 import { Intro } from './components/Intro'
 import { Findings } from './components/Findings'
 import { FilterTitle } from './components/FilterTitle'
-import './App.css'
+import './style/App.css'
 
 function App() {
 

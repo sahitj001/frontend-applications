@@ -147,6 +147,7 @@ export function BarChart(props) {
         return d.province
       })
       .rollup(function (d) {
+        // eslint-disable-next-line 
         return d3.mean(d.filter(d => d.province === d.province), d => d.capacity)
       }).entries(data)
       .sort((a, b) => d3.descending(a.value, b.value))
@@ -185,6 +186,7 @@ export function BarChart(props) {
         return d.province
       })
       .rollup(function (d) {
+        // eslint-disable-next-line 
         return d3.max(d.filter(d => d.province === d.province), d => d.capacity)
       }).entries(data)
       .sort((a, b) => d3.descending(a.value, b.value))
