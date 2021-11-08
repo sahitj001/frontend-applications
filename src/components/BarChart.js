@@ -20,13 +20,19 @@ const margin = {
 function handleMouseOver(e, barValue) {
   console.log("mouse over", e, barValue)
   d3.select(this)
+    
+    .transition()
+    .duration(200)
     .attr("fill", "orange")
+
 }
 //when you hover away from the bar, show the data on screen. I also wanted to do this for mouseOver but the problem was that in the beginning I have
 //nothing selected so I will get an error when loading the page.
 function handleMouseOut(e, barValue) {
   console.log("mouse out", e, barValue)
   d3.select(this)
+  .transition()
+    .duration(200)
     .attr("fill", "white")
 
   d3.select("#capacity").html(barValue.value)

@@ -1,6 +1,6 @@
 .container-intro{
     background-color: #faf8ff;
-    height:60vh;
+    height:40rem;
     display:flex;
     flex-direction: column;
 }
@@ -10,7 +10,7 @@
     position: relative;
     width: 100%;
     max-width:600px;
-    left:10em;
+    left:3%;
     background-color: #333333;
     padding: 1em 2em 1em 2em;
     border-radius: 10px 25px 10px 25px;
@@ -21,7 +21,8 @@
     position: relative;
     width: 100%;
     max-width:600px;
-    left:75em;
+    left:0;
+    right:3%;
     background-color: #333333;
     padding: 1em 2em 1em 2em;
     border-radius: 10px 25px 10px 25px;
