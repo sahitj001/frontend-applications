@@ -61,10 +61,26 @@ export function BarChart(props) {
   console.log('The array has', props.data.length, 'elements')
   console.log('selected choice is:', selectedChoice)
 
+  
+
   const container = svg
-    .append('g')
+
     //making sure labels show up by using this line code
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+    // .append('g')
+    // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+
+    
+//     let counter = 0
+//     if(counter = 0){
+//       runOnce()
+//     }
+// console.log(counter)
+//     function runOnce(){
+//       svg.append('g')
+//       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+//       counter++
+//       console.log('running')
+//     }
 
   function drawBars(container, data) {
     const theBars = container
@@ -96,6 +112,35 @@ export function BarChart(props) {
     y.rangeRound([sizes.height, 0])
   }
 
+      //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
+      var element =  document.getElementsByClassName('xAxis');
+      if (typeof(element) != 'undefined' && element != null && element.length>0)
+      {
+          console.log('CHECKING ELEMENT', element)
+      } else{
+
+          initAxes(container)
+          svg
+
+          //making sure labels show up by using this line code
+          .append('g')
+          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+          
+          console.log('it aint here, so im rendering')
+      }
+      
+      //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
+      // var element =  document.getElementsByClassName('draw');
+      // if (typeof(element) != 'undefined' && element != null && element.length>0)
+      // {
+      //     console.log('CHECKING ELEMENT', element)
+      // } else{
+      //   svg.attr('class', 'draw')
+      //   //making sure labels show up by using this line code
+      //   .append('g')
+      //   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+      //   console.log('doing it')
+      // }
 
   function initAxes(container) {
     //make the Y and X axis in this function. Wanted to have this function run only once but couldn't find a way how to.
@@ -105,6 +150,7 @@ export function BarChart(props) {
     container
       .append('g')
       .attr('class', 'yAxis')
+      // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
   }
 
   function totalPerProvince() {
@@ -139,7 +185,9 @@ export function BarChart(props) {
       .call(d3.axisBottom(x))
       .attr('transform', 'translate(0,' + sizes.height + ')')
     svg.select('.yAxis')
-      .call(d3.axisLeft(y).ticks(10))
+      .call(d3.axisLeft(y)
+      .ticks(10))
+    
 
     theBars.exit()
       .remove()
@@ -177,7 +225,8 @@ export function BarChart(props) {
       .call(d3.axisBottom(x))
       .attr('transform', 'translate(0,' + sizes.height + ')')
     svg.select('.yAxis')
-      .call(d3.axisLeft(y).ticks(10))
+      .call(d3.axisLeft(y)
+      .ticks(10))
 
     theBars.exit()
       .remove()
@@ -227,7 +276,7 @@ export function BarChart(props) {
 
   function checkState() {
     //when the state of the dropdown changes, the bar will render something different
-    initAxes(container)
+    // initAxes(container)
     if (selectedChoice === 'total') {
       initScales(totalPerProvince())
       drawBars(container, totalPerProvince())

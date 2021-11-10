@@ -49,8 +49,8 @@ useEffect(() => {
         </select>
         </div>
         {/* <BarChart data={data} selectedChoice={choice} /> */}
-        {/* <BarChart3 data={data}  selectedChoice={choice}/> */}
-        <BarChart4/>
+        <BarChart data={data}  selectedChoice={choice}/>
+        {/* <BarChart4/> */}
       
     </div>
   )

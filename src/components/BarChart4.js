@@ -157,13 +157,13 @@ console.log(choice)
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
     }
 
-    function choiceChanged(pls) {
-        console.log('aaa', pls)
-        x.domain(pls.map(province => province.key))
-        // Update the domain so the new y maximum is taken into account
-        y.domain([0, d3.max( pls.map(capacity => capacity.value))]);
+    function choiceChanged(data) {
+        console.log('aaa', data)
+        // Update the domain so the new y maximum is taken into account and that the x axes is set good
+        x.domain(data.map(province => province.key))
+        y.domain([0, d3.max( data.map(capacity => capacity.value))]);
         const bars = svg.selectAll('.bar')
-            .data(pls)
+            .data(data)
               .join(
             enter => enter.append("rect")
             .attr('class', 'bar')
@@ -182,9 +182,6 @@ console.log(choice)
                 .attr('width', x.bandwidth())
                 .attr('height', d => sizes.height - y(d.value)),
             exit => exit.remove())
-
-
-            
 
             svg
             .select('.xAxis')
