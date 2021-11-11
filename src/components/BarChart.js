@@ -61,15 +61,11 @@ export function BarChart(props) {
   console.log('The array has', props.data.length, 'elements')
   console.log('selected choice is:', selectedChoice)
 
-  
-
   const container = svg
-
     //making sure labels show up by using this line code
-    // .append('g')
-    // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+    .append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-    
 //     let counter = 0
 //     if(counter = 0){
 //       runOnce()
@@ -97,6 +93,8 @@ export function BarChart(props) {
       .attr('height', d => sizes.height - y(d.value))
       .on('mouseover', handleMouseOver)
       .on('mouseout', handleMouseOut)
+
+
   }
 
   function initScales(data) {
@@ -120,14 +118,12 @@ export function BarChart(props) {
       } else{
 
           initAxes(container)
-          svg
 
-          //making sure labels show up by using this line code
-          .append('g')
-          .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
           
           console.log('it aint here, so im rendering')
       }
+
+
       
       //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
       // var element =  document.getElementsByClassName('draw');
@@ -234,7 +230,6 @@ export function BarChart(props) {
     return average
   }
 
-
   function highestPerProvince() {
     //get the parking garage with the highest capacity per province
     const highest = d3collection.nest().key(function (d) {
@@ -290,9 +285,9 @@ export function BarChart(props) {
       drawBars(container, highestPerProvince())
     }
   }
-
+  checkState()
   useEffect(() => {
-    checkState()
+
   })
   
   return (

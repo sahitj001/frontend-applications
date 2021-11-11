@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as d3 from "d3"
 import { BarChart } from './components/BarChart'
-import { BarChart3 } from './components/BarChart3'
 import { BarChart4 } from './components/BarChart4'
+import { BarChart5 } from './components/BarChart5'
 import { Header } from './components/Header'
 import { Intro } from './components/Intro'
 import { Findings } from './components/Findings'
@@ -42,15 +42,15 @@ useEffect(() => {
       <Findings />
       <FilterTitle />
       <div className="filter">
-      <select id="filterChoice" onChange={(e) => setChoice(e.target.value)}>
+      {/* <select id="filterChoice" onChange={(e) => setChoice(e.target.value)}>
           {choices.map((choice) => (
             <option key={choice.value} value={choice.value}>{choice.name}</option>
           ))}
-        </select>
+        </select> */}
         </div>
         {/* <BarChart data={data} selectedChoice={choice} /> */}
-        <BarChart data={data}  selectedChoice={choice}/>
-        {/* <BarChart4/> */}
+        {/* <BarChart data={data}  selectedChoice={choice}/> */}
+        <BarChart5/>
       
     </div>
   )
