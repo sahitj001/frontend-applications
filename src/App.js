@@ -42,15 +42,15 @@ useEffect(() => {
       <Findings />
       <FilterTitle />
       <div className="filter">
-      {/* <select id="filterChoice" onChange={(e) => setChoice(e.target.value)}>
+      <select id="filterChoice" onChange={(e) => setChoice(e.target.value)}>
           {choices.map((choice) => (
             <option key={choice.value} value={choice.value}>{choice.name}</option>
           ))}
-        </select> */}
+        </select>
         </div>
         {/* <BarChart data={data} selectedChoice={choice} /> */}
-        {/* <BarChart data={data}  selectedChoice={choice}/> */}
-        <BarChart5/>
+        <BarChart data={data}  selectedChoice={choice}/>
+        {/* <BarChart5/> */}
       
     </div>
   )

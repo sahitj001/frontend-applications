@@ -1,5 +1,5 @@
 import React, {
-  useEffect
+  useEffect, useState
 } from "react";
 import * as d3 from "d3";
 import * as d3collection from "d3-collection";
@@ -20,18 +20,23 @@ const margin = {
 function handleMouseOver(e, barValue) {
   console.log("mouse over", e, barValue)
   d3.select(this)
-    
+
     .transition()
     .duration(200)
     .attr("fill", "orange")
 
+}
+
+const sizes = {
+  width: 900,
+  height: 500,
 }
 //when you hover away from the bar, show the data on screen. I also wanted to do this for mouseOver but the problem was that in the beginning I have
 //nothing selected so I will get an error when loading the page.
 function handleMouseOut(e, barValue) {
   console.log("mouse out", e, barValue)
   d3.select(this)
-  .transition()
+    .transition()
     .duration(200)
     .attr("fill", "white")
 
@@ -39,19 +44,57 @@ function handleMouseOut(e, barValue) {
   d3.select("#province").html(barValue.key)
 }
 //width and size of dataviz. i could for example say that the yAxis could be 200 high if i want to.
-const sizes = {
-  width: 900,
-  height: 500,
+
+function drawBars(container, data, x, y) {
+  const theBars = container
+    .selectAll('.bar')
+    .data(data)
+
+  theBars.enter()
+    .append('rect')
+    .attr("fill", "white")
+    .attr('class', 'bar')
+    .attr('x', d => x(d.key))
+    .attr('y', d => y(d.value))
+    .attr('width', x.bandwidth())
+    .attr('height', d => sizes.height - y(d.value))
+    .on('mouseover', handleMouseOver)
+    .on('mouseout', handleMouseOut)
+}
+
+let svg 
+let container ;
+
+const x = d3.scaleBand()
+const y = d3.scaleLinear()
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  svg = d3.select('#svg')
+//give the container a width and height
+.attr('width', 1000)
+.attr('height', 900);
+
+container = svg
+//making sure labels show up by using this line code
+.append('g')
+.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+initAxes(container);
+
+})
+
+function initAxes(container) {
+  //make the Y and X axis in this function. Wanted to have this function run only once but couldn't find a way how to.
+  container
+    .append('g')
+    .attr('class', 'xAxis')
+  container
+    .append('g')
+    .attr('class', 'yAxis')
+  // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 }
 
 export function BarChart(props) {
-  //select svg tag in HTML
-  const svg = d3.select('#svg')
-    //give the container a width and height
-    .attr('width', 1000)
-    .attr('height', 900)
-  const x = d3.scaleBand()
-  const y = d3.scaleLinear()
 
   //because i already gave my data array as a prop, i can use it here directly for my d3 bar chart
   const {
@@ -59,43 +102,26 @@ export function BarChart(props) {
     selectedChoice
   } = props;
   console.log('The array has', props.data.length, 'elements')
-  console.log('selected choice is:', selectedChoice)
+  console.log('selected choice is:', selectedChoice);
+  //     let counter = 0
+  //     if(counter = 0){
+  //       runOnce()
+  //     }
+  // console.log(counter)
+  //     function runOnce(){
+  //       svg.append('g')
+  //       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  //       counter++
+  //       console.log('running')
+  //     }
 
-  const container = svg
-    //making sure labels show up by using this line code
-    .append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-
-//     let counter = 0
-//     if(counter = 0){
-//       runOnce()
-//     }
-// console.log(counter)
-//     function runOnce(){
-//       svg.append('g')
-//       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-//       counter++
-//       console.log('running')
-//     }
-
-  function drawBars(container, data) {
-    const theBars = container
-      .selectAll('.bar')
-      .data(data)
-
-    theBars.enter()
-      .append('rect')
-      .attr("fill", "white")
-      .attr('class', 'bar')
-      .attr('x', d => x(d.key))
-      .attr('y', d => y(d.value))
-      .attr('width', x.bandwidth())
-      .attr('height', d => sizes.height - y(d.value))
-      .on('mouseover', handleMouseOver)
-      .on('mouseout', handleMouseOut)
-
-
-  }
+  useEffect(() => {
+    debugger;
+    if(data.length) {
+      const drawFunction = checkState();
+      drawBars(container, drawFunction, x, y)
+    }
+  }, [data, selectedChoice])
 
   function initScales(data) {
     // set domain equal to number of provinces and also make sure there is padding inbetween bars
@@ -110,44 +136,35 @@ export function BarChart(props) {
     y.rangeRound([sizes.height, 0])
   }
 
-      //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
-      var element =  document.getElementsByClassName('xAxis');
-      if (typeof(element) != 'undefined' && element != null && element.length>0)
-      {
-          console.log('CHECKING ELEMENT', element)
-      } else{
+  // //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
+  // var element =  document.getElementsByClassName('xAxis');
+  // if (typeof(element) != 'undefined' && element != null && element.length>0)
+  // {
+  //     console.log('CHECKING ELEMENT', element)
+  // } else{
 
-          initAxes(container)
+  //     console.log('it aint here, so im rendering')
+  // }
 
-          
-          console.log('it aint here, so im rendering')
-      }
-
-
-      
-      //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
-      // var element =  document.getElementsByClassName('draw');
-      // if (typeof(element) != 'undefined' && element != null && element.length>0)
-      // {
-      //     console.log('CHECKING ELEMENT', element)
-      // } else{
-      //   svg.attr('class', 'draw')
-      //   //making sure labels show up by using this line code
-      //   .append('g')
-      //   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-      //   console.log('doing it')
-      // }
-
-  function initAxes(container) {
-    //make the Y and X axis in this function. Wanted to have this function run only once but couldn't find a way how to.
-    container
-      .append('g')
-      .attr('class', 'xAxis')
-    container
-      .append('g')
-      .attr('class', 'yAxis')
-      // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  if (!data) {
+    return <h1>HERE{JSON.stringify(data)}</h1>;
   }
+  // Enter phase only once, since total per province is the first choice, it will use that data to enter() our datavis
+  
+
+  //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
+  // var element =  document.getElementsByClassName('draw');
+  // if (typeof(element) != 'undefined' && element != null && element.length>0)
+  // {
+  //     console.log('CHECKING ELEMENT', element)
+  // } else{
+  //   svg.attr('class', 'draw')
+  //   //making sure labels show up by using this line code
+  //   .append('g')
+  //   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  //   console.log('doing it')
+  // }
+
 
   function totalPerProvince() {
     //calculate the total capacity per province
@@ -182,8 +199,8 @@ export function BarChart(props) {
       .attr('transform', 'translate(0,' + sizes.height + ')')
     svg.select('.yAxis')
       .call(d3.axisLeft(y)
-      .ticks(10))
-    
+        .ticks(10))
+
 
     theBars.exit()
       .remove()
@@ -222,7 +239,7 @@ export function BarChart(props) {
       .attr('transform', 'translate(0,' + sizes.height + ')')
     svg.select('.yAxis')
       .call(d3.axisLeft(y)
-      .ticks(10))
+        .ticks(10))
 
     theBars.exit()
       .remove()
@@ -272,35 +289,32 @@ export function BarChart(props) {
   function checkState() {
     //when the state of the dropdown changes, the bar will render something different
     // initAxes(container)
+    let drawFunction;
     if (selectedChoice === 'total') {
-      initScales(totalPerProvince())
-      drawBars(container, totalPerProvince())
+      drawFunction = totalPerProvince;
+      //totalPerProvince()
     }
     if (selectedChoice === 'average') {
-      initScales(averagePerProvince())
-      drawBars(container, averagePerProvince())
+      drawFunction = averagePerProvince;
+
+      //averagePerProvince()
     }
     if (selectedChoice === 'max') {
-      initScales(highestPerProvince())
-      drawBars(container, highestPerProvince())
+      drawFunction = highestPerProvince;
+      //highestPerProvince()
     }
+    initScales(drawFunction());
+    return drawFunction;
   }
-  checkState()
-  useEffect(() => {
 
-  })
-  
-  return (
-    <div className="chart">
-      <div className="chart-info">
-        <p className="bar-p">Province: <span id="province"> Hover over a bar! </span></p>
-        <p className="bar-p">Capacity: <span id="capacity"> Hover over a bar! </span></p>
-      </div>
-        <h3 className="infoCap">Capacity</h3>
-        <h3 className="infoProv">Province</h3>
-      <svg
-        id="svg"
-      ></svg>
-    </div>
+
+
+  return ( <div className = "chart">
+      <div className = "chart-info" >
+      <p className = "bar-p" > Province: <span id = "province" > Hover over a bar! </span></p >
+      <p className = "bar-p" > Capacity: <span id = "capacity" > Hover over a bar! </span></p >
+      </div> <h3 className = "infoCap" > Capacity </h3> 
+      <h3 className = "infoProv" > Province </h3> <svg id = "svg" >
+      </svg> </div>
   )
 }
