@@ -37,11 +37,6 @@ According to a report of the Ministerie van Infrastructuur en Waterstaat, I foun
 The reason that Zuid-Holland has way more parking garages than all the other provinces, is because of urban construction plans. According to the government website of Zuid-Holland there were a lot of parking garages built because there is a municipal parking norm that has to be adhered. According to the parking norm, for each house that is built, there has to be a number of parking spots built. Because there are so much parking garages, Zuid-Holland is suffering from structully vacant parking garages.
 
 Because of such a low demand of parking garages, many projects are delayed or completely canceled. These projects have to adhere to the parking norms. Building these garages won't be profitable for the investors.
-
-
-### 🤔 Assumptions
-It could be possible that people park in Amsterdam to work. This also could mean that the garage they park at is free of cost (since their company pays for the parking costs). Another reason also could be that they are parking in Amsterdam because they want to have some fun in Amsterdam.
-
 ## ⌗ Data I need
 
 - Number of parking garages per province
