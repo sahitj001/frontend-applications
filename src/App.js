@@ -37,9 +37,9 @@ useEffect(() => {
 
   return (
     <div className="App">
-      <Header />
+      {/* <Header />
       <Intro />
-      <Findings />
+      <Findings /> */}
       <FilterTitle />
       <div className="filter">
       <select id="filterChoice" onChange={(e) => setChoice(e.target.value)}>
