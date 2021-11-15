@@ -2,7 +2,7 @@
 For this course I will learn how to create visualisations from external data. This data will then be visualized in D3. The website will be made with React.
 
 ## Debriefing
-![https://nl.wikipedia.org/wiki/De_Volkskrant#/media/Bestand:Volkskrant.svg](test)
+![test](img/volkskrant.svg)
 
 ## ⭐️ Design Challenge
 **Subject: The car in the city**
