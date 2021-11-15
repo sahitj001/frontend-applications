@@ -1,5 +1,5 @@
 import React, {
-  useEffect, useState
+  useEffect
 } from "react";
 import * as d3 from "d3";
 import * as d3collection from "d3-collection";
@@ -11,6 +11,7 @@ import '../style/BarChart.css'
 //http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html
 //https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873?edit=files&file=index.js&line
 //d3-collection is a deprecated package, but still working for me.
+//BIG SHOUTOUT TO SUWI FOR HELPING MY OUT WITH MY RENDER ISSUES
 
 const margin = {
   top: 50,
@@ -63,7 +64,7 @@ function drawBars(container, data, x, y) {
 }
 
 let svg 
-let container ;
+let container
 
 const x = d3.scaleBand()
 const y = d3.scaleLinear()
@@ -118,8 +119,9 @@ export function BarChart(props) {
   useEffect(() => {
     debugger;
     if(data.length) {
-      const drawFunction = checkState();
-      drawBars(container, drawFunction, x, y)
+      // put the data I got from checkState() in draw. Then use it as argument in drawBars
+      const draw = checkState();
+      drawBars(container, draw, x, y)
     }
   }, [data, selectedChoice])
 
@@ -202,8 +204,8 @@ export function BarChart(props) {
         .ticks(10))
 
 
-    theBars.exit()
-      .remove()
+    // theBars.exit()
+    //   .remove()
 
     return total
   }
@@ -241,8 +243,8 @@ export function BarChart(props) {
       .call(d3.axisLeft(y)
         .ticks(10))
 
-    theBars.exit()
-      .remove()
+    // theBars.exit()
+    //   .remove()
 
     return average
   }
@@ -280,8 +282,8 @@ export function BarChart(props) {
     svg.select('.yAxis')
       .call(d3.axisLeft(y).ticks(10))
 
-    theBars.exit()
-      .remove()
+    // theBars.exit()
+    //   .remove()
 
     return highest
   }

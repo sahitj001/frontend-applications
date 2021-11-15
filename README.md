@@ -1,25 +1,35 @@
-# Frontend-applications
+# 💻 Frontend-applications
 For this course I will learn how to create visualisations from external data. This data will then be visualized in D3. The website will be made with React.
 
-## Design Challenge
+## ⭐️ Design Challenge
 **Subject: The car in the city**
 
 How do different municipalities and places deal with parking within the city?
 
-We are going to deliver an interactive data visualization. We must have a good title with a good description. Building is done with a front-end framework.
+We are going to deliver an interactive data visualization. We must have a good title with a good description. Building is done with a front-end framework. The datavisualisation has to be rendered with D3.
 
-## Concept
+## 📝 Concept
 
 **Is there a connection between the number of parking spots and province?**
 
-### Assumptions
+### 🤔 Assumptions
 I assume that Noord-Holland will be having the highest average parking spots since Amsterdam has the most population dense city of the Netherlands.
 
-## Data I need
+## ⌗ Data I need
 
-[I will be needing the unique identifier of the garages](https://npropendata.rdw.nl/parkingdata/v2/)
+- Number of parking garages per province
+[I will be needing the unique identifier of the garages](https://npropendata.rdw.nl/parkingdata/v2/). The way this dataset works is that every garage contains a unique id. If I fetch all the unique id's from the API and look up the data I can find in which province each garage is located at.
 
-I will also need the parking garage data. This data has been downloaded locally. Shoutout to Sam for providing me this!
+A unique id looks like this: `"fc749565-1fe9-42f0-920a-3b4e718d62f9"`. 
+
+I then can request the data by inputting this as URL:
+`https://npropendata.rdw.nl/parkingdata/v2/fc749565-1fe9-42f0-920a-3b4e718d62f9`
+
+After having downloaded the information of each garage, I cleaned the data and created a new .json file. Every garage now contains 4 keys of data:
+
+```js
+//add json data
+```
 
 ## How do I install this project?
 Install the project:
