@@ -282,16 +282,16 @@ export function BarChart(props) {
     // initAxes(container)
     let drawFunction;
     if (selectedChoice === 'total') {
-      drawFunction = totalPerProvince;
+      drawFunction = totalPerProvince
     }
     if (selectedChoice === 'average') {
-      drawFunction = averagePerProvince;
+      drawFunction = averagePerProvince
     }
     if (selectedChoice === 'max') {
-      drawFunction = highestPerProvince;
+      drawFunction = highestPerProvince
     }
-    initScales(drawFunction());
-    return drawFunction;
+    initScales(drawFunction())
+    return drawFunction
   }
 
   return ( <div className = "chart">
