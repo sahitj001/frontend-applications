@@ -61,21 +61,21 @@ I then created a new json file that contains 910 garages. Every garage now conta
 }
 ```
 
-## How do I install this project?
+## 📦 How do I install this project?
 Install the project:
 ```
 npm install
 ```
-## How do I run this project?
+## ▶️ How do I run this project?
 To run this project:
 ```
 npm run start
 ```
 
-## Live link of the project
+## 🔗 Live link of the project
 [Live link of the project](https://relaxed-panini-67bcc0.netlify.app/)
 
-## Credits and License
+## ⚖️ Credits and License
 Shoutout to Sam and Ralf for helping me out here and there.
 This project has a MIT license.
 
