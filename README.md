@@ -1,7 +1,7 @@
 # 💻 Frontend-applications
 For this course I will learn how to create visualisations from external data. This data will then be visualized in D3. The website will be made with React.
 
-## Debriefing
+## 📩 Debriefing
 ![test](img/vk.png)
 
 De Volkskrant requested the students of the Tech Track to find interesting insights regarding the car in the city. The subject is broad and we can choose what concept we will be building as long as it relates to the car in the city. The datasets we have to use are mainly from the [RDW](https://www.rdw.nl/). However, we are free to use other datasets as long as they are part of the main subject. Based on our datavisualisations, De Volkskrant might use this information to write an interesting article.
@@ -24,7 +24,7 @@ We are going to take a look at three views on my bar chart:
 - Show which province has the biggest parking garage by showing the highest parking capacity of that garage.
 
 Through these views, I was able to find interesting research questions.
-### Research questions
+### 🧪 Research questions
 
 Based on my datavisualisation I made two research questions:
 
