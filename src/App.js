@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import * as d3 from "d3"
 import { BarChart } from './components/BarChart'
-import { BarChart4 } from './components/BarChart4'
-import { BarChart5 } from './components/BarChart5'
+// import { BarChart4 } from './components/BarChart4'
+// import { BarChart5 } from './components/BarChart5'
 import { Header } from './components/Header'
 import { Intro } from './components/Intro'
 import { Findings } from './components/Findings'
@@ -48,10 +48,7 @@ useEffect(() => {
           ))}
         </select>
         </div>
-        {/* <BarChart data={data} selectedChoice={choice} /> */}
-        <BarChart data={data}  selectedChoice={choice}/>
-        {/* <BarChart5/> */}
-      
+        <BarChart data={data}  selectedChoice={choice}/>      
     </div>
   )
 }
