@@ -3,6 +3,7 @@ import React, {
 } from "react";
 import * as d3 from "d3";
 import * as d3collection from "d3-collection";
+import {easeCubicInOut} from "d3-ease";
 import '../style/BarChart.css'
 
 //resources i have been using
@@ -12,6 +13,7 @@ import '../style/BarChart.css'
 //https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873?edit=files&file=index.js&line
 //d3-collection is a deprecated package, but still working for me.
 //BIG SHOUTOUT TO SUWI FOR HELPING MY OUT WITH MY RENDER ISSUES
+//d3 animation transitions documentation: https://observablehq.com/@d3/easing-animations
 
 // margins for axes
 const margin = {
@@ -75,13 +77,13 @@ const y = d3.scaleLinear()
 //run code only after the DOM has completely loaded. Because of render issues I had to use this code.
 document.addEventListener('DOMContentLoaded', (event) => {
   svg = d3.select('#svg')
-//give the container a width and height
+//give the container a width and height and create a group element where we will render our chart in.
 .attr('width', 1000)
 .attr('height', 900)
-//making sure labels show up by using this line code
 .append('g')
+//making sure labels show up by making use of margin
 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
+// create X and Y axis group after the DOM has completely rendered. This code will be just like the code above, only run once.
 initAxes(svg);
 
 })
@@ -94,30 +96,16 @@ function initAxes(container) {
   container
     .append('g')
     .attr('class', 'yAxis')
-  // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 }
 
 export function BarChart(props) {
-
-  //because i already gave my data array as a prop, i can use it here directly for my d3 bar chart
+  //because I already gave my data array as a prop, I can use it here directly for my d3 bar chart
   const {
     data,
     selectedChoice
   } = props;
   console.log('The array has', props.data.length, 'elements')
   console.log('selected choice is:', selectedChoice);
-
-  //     let counter = 0
-  //     if(counter = 0){
-  //       runOnce()
-  //     }
-  // console.log(counter)
-  //     function runOnce(){
-  //       svg.append('g')
-  //       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-  //       counter++
-  //       console.log('running')
-  //     }
 
   useEffect(() => {
     debugger;
@@ -134,39 +122,14 @@ export function BarChart(props) {
     x.padding(0.2)
     // set domain equal to the parking capacity 
     y.domain([0, d3.max(data.map(capacity => capacity.value))])
-
-    //range is the absolute value of your data. If my domain is for example at max 10 and my range is 1000 and 
-    //say that I have each value of domain evenly spread, that means that every step my range increases with 100. A domain value of 25 would give a range of 250.
-    x.rangeRound([0, sizes.width])
-    y.rangeRound([sizes.height, 0])
+    // set range size
+    x.range([0, sizes.width])
+    y.range([sizes.height, 0])
   }
-
-  // //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
-  // var element =  document.getElementsByClassName('xAxis');
-  // if (typeof(element) != 'undefined' && element != null && element.length>0)
-  // {
-  //     console.log('CHECKING ELEMENT', element)
-  // } else{
-
-  //     console.log('it aint here, so im rendering')
-  // }
 
   if (!data) {
     return <h1>HERE{JSON.stringify(data)}</h1>;
   }
-
-  //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
-  // var element =  document.getElementsByClassName('draw');
-  // if (typeof(element) != 'undefined' && element != null && element.length>0)
-  // {
-  //     console.log('CHECKING ELEMENT', element)
-  // } else{
-  //   svg.attr('class', 'draw')
-  //   //making sure labels show up by using this line code
-  //   .append('g')
-  //   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-  //   console.log('doing it')
-  // }
 
   function totalPerProvince() {
     //calculate the total capacity per province
@@ -185,12 +148,15 @@ export function BarChart(props) {
 
     //updating the bars
     theBars
+      .transition()
+      .duration(900)
+      .ease(easeCubicInOut)
       .attr('x', d => x(d.key))
       .attr('y', d => y(d.value))
       .attr('width', x.bandwidth())
       .attr('height', d => sizes.height - y(d.value))
 
-    //by updating the domain, you set up the scaling of your axes  
+    //update domain
     x.domain(total.map(province => province.key))
     y.domain([0, d3.max(total.map(capacity => capacity.value))])
 
@@ -221,12 +187,15 @@ export function BarChart(props) {
 
     //update bars
     theBars
+      .transition()
+      .duration(900)
+      .ease(easeCubicInOut)
       .attr('x', d => x(d.key))
       .attr('y', d => y(d.value))
       .attr('width', x.bandwidth())
       .attr('height', d => sizes.height - y(d.value))
 
-    //update domain, setting up the scaling of my axes
+    //update domain
     x.domain(average.map(province => province.key))
     y.domain([0, d3.max(average.map(capacity => capacity.value))])
 
@@ -258,12 +227,15 @@ export function BarChart(props) {
 
     //update bars
     theBars
+      .transition()
+      .duration(900)
+      .ease(easeCubicInOut)
       .attr('x', d => x(d.key))
       .attr('y', d => y(d.value))
       .attr('width', x.bandwidth())
       .attr('height', d => sizes.height - y(d.value))
 
-    //update domain, setting up scaling for each axis
+    //update domain
     x.domain(highest.map(province => province.key))
     y.domain([0, d3.max(highest.map(capacity => capacity.value))])
 
@@ -279,7 +251,8 @@ export function BarChart(props) {
 
   function checkState() {
     //when the state of the dropdown changes, the bar will render something different
-    // initAxes(container)
+    //drawFunction is a dynamic variable which means it contains a different function depending on the state of the dropdown 
+    //totalPerProvince, averagePerProvince and highestPerProvince transform the fetched data and immediately update the bars.
     let drawFunction;
     if (selectedChoice === 'total') {
       drawFunction = totalPerProvince
@@ -290,6 +263,7 @@ export function BarChart(props) {
     if (selectedChoice === 'max') {
       drawFunction = highestPerProvince
     }
+    //before we return the data I want to put the transformed data into the axes
     initScales(drawFunction())
     return drawFunction
   }

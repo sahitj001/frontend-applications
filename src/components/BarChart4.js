@@ -546,3 +546,40 @@ return (
     //   </div>
     // )
   }
+
+  // OTHER TRIES ---------------------------------------------
+  
+  // //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
+  // var element =  document.getElementsByClassName('xAxis');
+  // if (typeof(element) != 'undefined' && element != null && element.length>0)
+  // {
+  //     console.log('CHECKING ELEMENT', element)
+  // } else{
+
+  //     console.log('it aint here, so im rendering')
+  // }
+
+    //https://stackoverflow.com/questions/5629684/how-can-i-check-if-an-element-exists-in-the-visible-dom
+  // var element =  document.getElementsByClassName('draw');
+  // if (typeof(element) != 'undefined' && element != null && element.length>0)
+  // {
+  //     console.log('CHECKING ELEMENT', element)
+  // } else{
+  //   svg.attr('class', 'draw')
+  //   //making sure labels show up by using this line code
+  //   .append('g')
+  //   .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  //   console.log('doing it')
+  // }
+  
+  //     let counter = 0
+  //     if(counter = 0){
+  //       runOnce()
+  //     }
+  // console.log(counter)
+  //     function runOnce(){
+  //       svg.append('g')
+  //       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+  //       counter++
+  //       console.log('running')
+  //     }
