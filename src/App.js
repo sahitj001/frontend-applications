@@ -3,6 +3,7 @@ import * as d3 from "d3"
 import { BarChart } from './components/BarChart'
 // import { BarChart4 } from './components/BarChart4'
 // import { BarChart5 } from './components/BarChart5'
+import { References } from './components/References'
 import { Header } from './components/Header'
 import { Intro } from './components/Intro'
 import { Findings } from './components/Findings'
@@ -37,9 +38,9 @@ useEffect(() => {
 
   return (
     <div className="App">
-      {/* <Header />
+      <Header />
       <Intro />
-      <Findings /> */}
+      <Findings />
       <FilterTitle />
       <div className="filter">
       <select id="filterChoice" onChange={(e) => setChoice(e.target.value)}>
@@ -48,8 +49,10 @@ useEffect(() => {
           ))}
         </select>
         </div>
-        <BarChart data={data}  selectedChoice={choice}/>      
+        <BarChart data={data}  selectedChoice={choice}/>     
+        <References />
     </div>
+    
   )
 }
 
