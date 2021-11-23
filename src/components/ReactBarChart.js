@@ -77,18 +77,18 @@ import React, {
   }
   
   //run code only after the DOM has completely loaded. Because of render issues I had to use this code.
-  document.addEventListener('DOMContentLoaded', (event) => {
-    svg = d3.select('#svg')
-  //give the container a width and height and create a group element where we will render our chart in.
-  .attr('width', 1000)
-  .attr('height', 900)
-  .append('g')
-  //making sure labels show up by making use of margin
-  .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-  // create X and Y axis group after the DOM has completely rendered. This code will be just like the code above, only run once.
-  initAxes(svg);
+  // document.addEventListener('DOMContentLoaded', (event) => {
+  //   svg = d3.select('#svg')
+  // //give the container a width and height and create a group element where we will render our chart in.
+  // .attr('width', 1000)
+  // .attr('height', 900)
+  // .append('g')
+  // //making sure labels show up by making use of margin
+  // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+  // // create X and Y axis group after the DOM has completely rendered. This code will be just like the code above, only run once.
+  // initAxes(svg);
   
-  })
+  // })
   
   function initAxes(container) {
     //make the Y and X axis in this function. Wanted to have this function run only once but couldn't find a way how to.
@@ -102,7 +102,7 @@ import React, {
   
   export function ReactBarChart(props) {
     let [selectedData, setSelectedData] = useState([])
-
+    
     //because I already gave my data array as a prop, I can use it here directly for my d3 bar chart
     const {
       data,
@@ -110,17 +110,13 @@ import React, {
     } = props;
     console.log('The array has', props.data.length, 'elements')
     console.log('selected choice is:', selectedChoice);
-  
+    console.log('the data', data)
     useEffect(() => {
       if(data.length) {
         // put the data I got from checkState() in draw. Then use it as argument in drawBars
-        debugger;
-        const draw = checkState();
-        console.log('draaaw', draw)
-
-        
-        
-
+  
+        checkState();
+        // console.log('draaaw', draw)
       }
     }, [data, selectedChoice])
 
@@ -245,9 +241,9 @@ import React, {
     //     .attr('width', x.bandwidth())
     //     .attr('height', d => sizes.height - y(d.value))
   
-    //   //update domain
-    //   x.domain(highest.map(province => province.key))
-    //   y.domain([0, d3.max(highest.map(capacity => capacity.value))])
+      //update domain
+      // x.domain(highest.map(province => province.key))
+      // y.domain([0, d3.max(highest.map(capacity => capacity.value))])
   
     //   //make axes show up
     //   svg.select('.xAxis')
@@ -274,22 +270,29 @@ import React, {
         drawFunction = highestPerProvince
       }
       //before we return the data I want to put the transformed data into the axes
-    //   initScales(drawFunction())
+      initScales(drawFunction())
       setSelectedData(drawFunction)
       
       return drawFunction
     }
 
+    console.log('testttt', selectedData)
+
    
   
-    return ( <div className = "chart">
+    return ( <div className = "react-chart">
         <div className = "chart-info" >
         <h1>React Bar Chart</h1>
         <p className = "bar-p" > Province: <span id = "province" > Hover over a bar! </span></p >
         <p className = "bar-p" > Capacity: <span id = "capacity" > Hover over a bar! </span></p >
         </div> <h3 className = "infoCap" > Capacity </h3> 
         <h3 className = "infoProv" > Province </h3> 
-        <svg width={1000} height={900}>
-        </svg> </div>
+        <svg width={1000} height={500}>
+          <g>
+          {selectedData.map(d => <rect x={x(d.key)} y={y(d.value)} width={x.bandwidth()} height={d.value} fill={"white"} />)}
+          </g>
+         
+        </svg> 
+        </div>
     )
   }
