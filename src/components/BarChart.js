@@ -21,6 +21,16 @@ const margin = {
   left: 50,
 }
 
+const sizes = {
+  width: 900,
+  height: 500,
+}
+
+let svg 
+
+const x = d3.scaleBand()
+const y = d3.scaleLinear()
+
 // hover over element to see data about the bar
 function handleMouseOver(e, barValue) {
   console.log("mouse over", e, barValue)
@@ -32,11 +42,6 @@ function handleMouseOver(e, barValue) {
 
     d3.select("#capacity").html(barValue.value)
     d3.select("#province").html(barValue.key)
-}
-
-const sizes = {
-  width: 900,
-  height: 500,
 }
 
 //when you hover away from the bar, show the data on screen.
@@ -51,7 +56,7 @@ function handleMouseOut(e, barValue) {
   d3.select("#province").html(barValue.key)
 }
 
-function drawBars(container, data, x, y) {
+function drawBars(container, data) {
   const theBars = container
     .selectAll('.bar')
     .data(data)
@@ -68,11 +73,6 @@ function drawBars(container, data, x, y) {
     .on('mouseout', handleMouseOut)
     console.log('ENTER DONE')
 }
-
-let svg 
-
-const x = d3.scaleBand()
-const y = d3.scaleLinear()
 
 //run code only after the DOM has completely loaded. Because of render issues I had to use this code.
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -108,11 +108,10 @@ export function BarChart(props) {
   console.log('selected choice is:', selectedChoice);
 
   useEffect(() => {
-    debugger;
     if(data.length) {
       // put the data I got from checkState() in draw. Then use it as argument in drawBars
       const draw = checkState();
-      drawBars(svg, draw, x, y)
+      drawBars(svg, draw)
     }
   }, [data, selectedChoice])
 
@@ -160,7 +159,7 @@ export function BarChart(props) {
     x.domain(total.map(province => province.key))
     y.domain([0, d3.max(total.map(capacity => capacity.value))])
 
-    //update the axes
+    //make axes show up
     svg.select('.xAxis')
       .call(d3.axisBottom(x))
       .attr('transform', 'translate(0,' + sizes.height + ')')
@@ -199,7 +198,7 @@ export function BarChart(props) {
     x.domain(average.map(province => province.key))
     y.domain([0, d3.max(average.map(capacity => capacity.value))])
 
-    //update axes
+    //make axes show up
     svg.select('.xAxis')
       .call(d3.axisBottom(x))
       .attr('transform', 'translate(0,' + sizes.height + ')')
@@ -239,7 +238,7 @@ export function BarChart(props) {
     x.domain(highest.map(province => province.key))
     y.domain([0, d3.max(highest.map(capacity => capacity.value))])
 
-    //update axes
+    //make axes show up
     svg.select('.xAxis')
       .call(d3.axisBottom(x))
       .attr('transform', 'translate(0,' + sizes.height + ')')

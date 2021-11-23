@@ -11,7 +11,7 @@ export function Intro() {
                     I wanted to know if there was a connection between the number of parking spots and province. I know for example that in Amsterdam, 
                     there are a lot of parking garages because it is a busy city. But is there aside from it being a busy city another reason to have a lot of parking garages? 
                     </p>
-x            </div>
+            </div>
 
             <div className="info-dataset">
                 <h2 className="info-h2">What data did I use?</h2>
