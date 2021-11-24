@@ -3,106 +3,60 @@ import React, {
   } from "react";
   import * as d3 from "d3";
   import * as d3collection from "d3-collection";
-  import {easeCubicInOut} from "d3-ease";
   import '../style/ReactBarChart.css'
   
-  //resources i have been using
-  //played around with data: https://www.youtube.com/watch?v=BDpBAFvdjYo
-  //also playing around with mouseover: http://bl.ocks.org/mbostock/2706022
-  //http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html
-  //https://vizhub.com/Razpudding/c2a9c9b4fde84816931c404951c79873?edit=files&file=index.js&line
-  //d3-collection is a deprecated package, but still working for me.
-  //BIG SHOUTOUT TO SUWI FOR HELPING MY OUT WITH MY RENDER ISSUES
-  //d3 animation transitions documentation: https://observablehq.com/@d3/easing-animations
-  
+  //main resources I have been using
+  //this very long video from Curran Kelleher: https://www.youtube.com/watch?v=2LhoCfjm8R4
+  //also got some inspiration from this datavisualisation: https://vizhub.com/curran/b9069ad0a02c4ab5b29f0b8dcb447396?edit=files&file=index.js
+  //BIG SHOUTOUT TO SUWI FOR HELPING MY OUT WITH MY RENDER ISSUES in my somewhat more D3 version combined with React!
 
 
   // margins for axes
   const margin = {
     top: 50,
     left: 50,
+    bottom:50,
+    right:50
   }
   
   const sizes = {
     width: 900,
     height: 500,
   }
+
+
+  const innerHeight = sizes.height - margin.top - margin.bottom;
+  const innerWidth = sizes.width - margin.left - margin.right;    
   
-  let svg 
-  
-  const x = d3.scaleBand()
-  const y = d3.scaleLinear()
-  
-  // hover over element to see data about the bar
-  function handleMouseOver(e, barValue) {
-    console.log("mouse over", e, barValue)
-    d3.select(this)
-  
-      .transition()
-      .duration(200)
-      .attr("fill", "orange")
-  
-      d3.select("#capacity").html(barValue.value)
-      d3.select("#province").html(barValue.key)
-  }
-  
-  //when you hover away from the bar, show the data on screen.
-  function handleMouseOut(e, barValue) {
-    console.log("mouse out", e, barValue)
-    d3.select(this)
-      .transition()
-      .duration(200)
-      .attr("fill", "white")
-  
-    d3.select("#capacity").html(barValue.value)
-    d3.select("#province").html(barValue.key)
-  }
-  
-  function drawBars(container, data) {
-    const theBars = container
-      .selectAll('.bar')
-      .data(data)
-      console.log('ENTERING', theBars)
-    theBars.enter()
-      .append('rect')
-      .attr("fill", "white")
-      .attr('class', 'bar')
-      .attr('x', d => x(d.key))
-      .attr('y', d => y(d.value))
-      .attr('width', x.bandwidth())
-      .attr('height', d => sizes.height - y(d.value))
-      .on('mouseover', handleMouseOver)
-      .on('mouseout', handleMouseOut)
-      console.log('ENTER DONE')
-  }
-  
-  //run code only after the DOM has completely loaded. Because of render issues I had to use this code.
-  // document.addEventListener('DOMContentLoaded', (event) => {
-  //   svg = d3.select('#svg')
-  // //give the container a width and height and create a group element where we will render our chart in.
-  // .attr('width', 1000)
-  // .attr('height', 900)
-  // .append('g')
-  // //making sure labels show up by making use of margin
-  // .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-  // // create X and Y axis group after the DOM has completely rendered. This code will be just like the code above, only run once.
-  // initAxes(svg);
-  
-  // })
-  
-  function initAxes(container) {
-    //make the Y and X axis in this function. Wanted to have this function run only once but couldn't find a way how to.
-    container
-      .append('g')
-      .attr('class', 'xAxis')
-    container
-      .append('g')
-      .attr('class', 'yAxis')
-  }
-  
-  export function ReactBarChart(props) {
+
+  export function ReactBarChart(props) { 
+    let [hoverCap, setHoverCap] = useState('Hover over a bar!')
+    let [hoverProv, setHoverProv] = useState('Hover over a bar!')
     let [selectedData, setSelectedData] = useState([])
+
+    const x = d3.scaleBand()
+    .domain(selectedData.map(province => province.key))
+    .range([0, innerWidth])
+    .padding(0.2)
+  
+    const y = d3.scaleLinear()
+    .domain([0, d3.max(selectedData.map(capacity => capacity.value))])
+    .range([innerHeight, 0])
     
+    function overBar(e){
+        // console.log("going over: ", e, val)
+        console.log("checking for value: ", e.target)
+        const currentHoverValue = e.target.getAttribute('value')
+        const currentHoverKey = e.target.getAttribute('province')
+        e.target.setAttribute("fill", 'orange')
+        setHoverCap(currentHoverValue)
+        setHoverProv(currentHoverKey)
+      }
+
+      function leaveBar(e){
+          e.target.setAttribute('fill', 'white')
+      }
+ 
     //because I already gave my data array as a prop, I can use it here directly for my d3 bar chart
     const {
       data,
@@ -113,25 +67,9 @@ import React, {
     console.log('the data', data)
     useEffect(() => {
       if(data.length) {
-        // put the data I got from checkState() in draw. Then use it as argument in drawBars
-  
-        checkState();
-        // console.log('draaaw', draw)
+        checkState()
       }
     }, [data, selectedChoice])
-
-
-  
-    function initScales(data) {
-      // set domain equal to number of provinces and also make sure there is padding inbetween bars
-      x.domain(data.map(province => province.key))
-      x.padding(0.2)
-      // set domain equal to the parking capacity 
-      y.domain([0, d3.max(data.map(capacity => capacity.value))])
-      // set range size
-      x.range([0, sizes.width])
-      y.range([sizes.height, 0])
-    }
   
     if (!data) {
       return <h1>HERE{JSON.stringify(data)}</h1>;
@@ -149,31 +87,6 @@ import React, {
         }).entries(data) //the data we are using
         .sort((a, b) => d3.descending(a.value, b.value)) //then sort data from high to low
   
-    //   const theBars = svg.selectAll('.bar')
-    //     .data(total)
-  
-    //   //updating the bars
-    //   theBars
-    //     .transition()
-    //     .duration(900)
-    //     .ease(easeCubicInOut)
-    //     .attr('x', d => x(d.key))
-    //     .attr('y', d => y(d.value))
-    //     .attr('width', x.bandwidth())
-    //     .attr('height', d => sizes.height - y(d.value))
-  
-    //   //update domain
-    //   x.domain(total.map(province => province.key))
-    //   y.domain([0, d3.max(total.map(capacity => capacity.value))])
-  
-    //   //make axes show up
-    //   svg.select('.xAxis')
-    //     .call(d3.axisBottom(x))
-    //     .attr('transform', 'translate(0,' + sizes.height + ')')
-    //   svg.select('.yAxis')
-    //     .call(d3.axisLeft(y)
-    //       .ticks(10))
-  
       return total
     }
   
@@ -187,31 +100,6 @@ import React, {
           return d3.mean(d.filter(d => d.province === d.province), d => d.capacity)
         }).entries(data)
         .sort((a, b) => d3.descending(a.value, b.value))
-  
-    //   const theBars = svg.selectAll('.bar')
-    //     .data(average)
-  
-    //   //update bars
-    //   theBars
-    //     .transition()
-    //     .duration(900)
-    //     .ease(easeCubicInOut)
-    //     .attr('x', d => x(d.key))
-    //     .attr('y', d => y(d.value))
-    //     .attr('width', x.bandwidth())
-    //     .attr('height', d => sizes.height - y(d.value))
-  
-    //   //update domain
-    //   x.domain(average.map(province => province.key))
-    //   y.domain([0, d3.max(average.map(capacity => capacity.value))])
-  
-    //   //make axes show up
-    //   svg.select('.xAxis')
-    //     .call(d3.axisBottom(x))
-    //     .attr('transform', 'translate(0,' + sizes.height + ')')
-    //   svg.select('.yAxis')
-    //     .call(d3.axisLeft(y)
-    //       .ticks(10))
   
       return average
     }
@@ -227,31 +115,6 @@ import React, {
         }).entries(data)
         .sort((a, b) => d3.descending(a.value, b.value))
       console.log(highest)
-  
-    //   const theBars = svg.selectAll('.bar')
-    //     .data(highest)
-  
-    //   //update bars
-    //   theBars
-    //     .transition()
-    //     .duration(900)
-    //     .ease(easeCubicInOut)
-    //     .attr('x', d => x(d.key))
-    //     .attr('y', d => y(d.value))
-    //     .attr('width', x.bandwidth())
-    //     .attr('height', d => sizes.height - y(d.value))
-  
-      //update domain
-      // x.domain(highest.map(province => province.key))
-      // y.domain([0, d3.max(highest.map(capacity => capacity.value))])
-  
-    //   //make axes show up
-    //   svg.select('.xAxis')
-    //     .call(d3.axisBottom(x))
-    //     .attr('transform', 'translate(0,' + sizes.height + ')')
-    //   svg.select('.yAxis')
-    //     .call(d3.axisLeft(y).ticks(10))
-  
       return highest
     }
   
@@ -269,30 +132,83 @@ import React, {
       if (selectedChoice === 'max') {
         drawFunction = highestPerProvince
       }
-      //before we return the data I want to put the transformed data into the axes
-      initScales(drawFunction())
       setSelectedData(drawFunction)
-      
-      return drawFunction
     }
 
-    console.log('testttt', selectedData)
-
-   
-  
+    
     return ( <div className = "react-chart">
         <div className = "chart-info" >
         <h1>React Bar Chart</h1>
-        <p className = "bar-p" > Province: <span id = "province" > Hover over a bar! </span></p >
-        <p className = "bar-p" > Capacity: <span id = "capacity" > Hover over a bar! </span></p >
+        <p className = "bar-p" > Province: <span id = "province" > {hoverCap}</span></p >
+        <p className = "bar-p" > Capacity: <span id = "capacity" > {hoverProv} </span></p >
         </div> <h3 className = "infoCap" > Capacity </h3> 
-        <h3 className = "infoProv" > Province </h3> 
-        <svg width={1000} height={500}>
-          <g>
-          {selectedData.map(d => <rect x={x(d.key)} y={y(d.value)} width={x.bandwidth()} height={d.value} fill={"white"} />)}
-          </g>
-         
+        <h3 className = "infoProv" > Province </h3>
+        
+        {/* we will work in the svg element, we start by giving it a size */}
+        <svg width={1000} height={600}>
+        
+        {/* the next step is to create a group element with margin so that we can show our axes */}
+        <g transform={`translate(${150},${margin.top})`}>
+
+        {/* start with making the x axis */}
+        <g transform={`translate(0, ${sizes.height})`}>
+        <line x1={1000} transform={`translate(0, ${-85})`} stroke="white" />
+
+        {/* I map the labels and then render them in the HTML */}
+        {x.domain().map( d =>
+            <text
+            style={{ textAnchor: 'middle' }}
+            fontSize={8}
+            fill={'white'}
+
+            // set positioning of each label, might look a bit crooked but hey couldn't find another way ¯\_(ツ)_/¯
+            x={x(d) + 30}
+            y="-64px"
+            >
+
+            {/* show the data in the HTML */}
+            {d}
+            </text>
+        )}
+        </g>
+        
+        {/* render the y axis */}
+        <g>
+        <line y2={415} stroke="white" />
+
+        {/* mapping the labels */}
+        {y.ticks().map(tickValue => (
+          <text
+            key={tickValue}
+            style={{ textAnchor: 'end' }}
+            fill={'white'}
+
+            //setting the position of the ticks
+            y={y(tickValue) + 5}
+            x={-10}
+          >
+            {/* show the data in HTML */}
+            {tickValue}
+          </text>
+        ))}
+        </g>     
+
+         {/* render the bars */}
+          {selectedData.map(d => <rect 
+          x={x(d.key)} 
+          y={y(d.value)} 
+          width={x.bandwidth()} 
+          height={400 - y(d.value)} 
+          fill={"white"}
+          value={d.value}
+          province={d.key} 
+          onMouseOver={overBar}
+          onMouseLeave={leaveBar}
+           />)} 
+           </g>
+
         </svg> 
+
         </div>
     )
   }
