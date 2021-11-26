@@ -32,15 +32,15 @@ g > text {
 .infoCap{
     position: absolute;
     color:#faf8ff;
-    /* left: 20vw;
-    top: 325vh; */
+    left: -3em;
+    /* top: 325vh; */
     transform: rotate(270deg) translate(-350%, 1500%);
 }
 
 .infoProv{
     position: absolute;
     color:#faf8ff;
-    transform: translate(1900%, 2050%);
+    transform: translate(1750%, 2250%);
 }
 
 .xAxis{
@@ -50,6 +50,4 @@ g > text {
     color:royalblue;
 }
 
-rect{
-    color:green;
-}
+

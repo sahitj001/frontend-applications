@@ -7,3 +7,7 @@ rect{
     transition-duration: 0.5s;
     transition-timing-function: ease;
 }
+
+.react-chart-title{
+    color:white;
+}

@@ -20,8 +20,8 @@ import React, {
   }
   
   const sizes = {
-    width: 900,
-    height: 500,
+    width:1000,
+    height: 600,
   }
 
 
@@ -138,32 +138,34 @@ import React, {
     
     return ( <div className = "react-chart">
         <div className = "chart-info" >
-        <h1>React Bar Chart</h1>
+        <h1 className= 'react-chart-title' >Rendering the data with React! ⚛</h1>
         <p className = "bar-p" > Province: <span id = "province" > {hoverCap}</span></p >
         <p className = "bar-p" > Capacity: <span id = "capacity" > {hoverProv} </span></p >
-        </div> <h3 className = "infoCap" > Capacity </h3> 
+        </div> 
+        
+        <h3 className = "infoCap" > Capacity </h3> 
         <h3 className = "infoProv" > Province </h3>
         
         {/* we will work in the svg element, we start by giving it a size */}
-        <svg width={1000} height={600}>
+        <svg width={1200} height={600}>
         
         {/* the next step is to create a group element with margin so that we can show our axes */}
         <g transform={`translate(${150},${margin.top})`}>
 
         {/* start with making the x axis */}
         <g transform={`translate(0, ${sizes.height})`}>
-        <line x1={1000} transform={`translate(0, ${-85})`} stroke="white" />
+        <line x1={900} transform={`translate(0, ${-100})`} stroke="lightblue" />
 
         {/* I map the labels and then render them in the HTML */}
         {x.domain().map( d =>
             <text
             style={{ textAnchor: 'middle' }}
-            fontSize={8}
+            fontSize={10}
             fill={'white'}
 
             // set positioning of each label, might look a bit crooked but hey couldn't find another way ¯\_(ツ)_/¯
             x={x(d) + 30}
-            y="-64px"
+            y="-80px"
             >
 
             {/* show the data in the HTML */}
@@ -174,7 +176,7 @@ import React, {
         
         {/* render the y axis */}
         <g>
-        <line y2={415} stroke="white" />
+        <line y2={500} stroke="lightblue" />
 
         {/* mapping the labels */}
         {y.ticks().map(tickValue => (
@@ -198,7 +200,7 @@ import React, {
           x={x(d.key)} 
           y={y(d.value)} 
           width={x.bandwidth()} 
-          height={400 - y(d.value)} 
+          height={500 - y(d.value)} 
           fill={"white"}
           value={d.value}
           province={d.key} 
