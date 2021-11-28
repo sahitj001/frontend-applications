@@ -176,13 +176,13 @@ import React, {
         
         {/* render the y axis stroke */}
         <g>
-        <line y2={500} stroke="royalblue" />
+        <line y2={506} stroke="royalblue" />
 
         {/* create upper tick of y axis  */}
-        <line   x2={-6}
-                stroke='royalblue'
-                y={0}
-        ></line>
+        <line   
+            x2={-6}
+            stroke='royalblue'
+        />
 
         {/* mapping the labels */}
         {y.ticks(10).map(tickValue => (
@@ -201,7 +201,7 @@ import React, {
                     fontSize={10}
                     //setting the position of the ticks
                     y={y(tickValue) + 5}
-                    x={-15}
+                    x={-8}
                 >
             {/* show the data in HTML */}
             {tickValue}
