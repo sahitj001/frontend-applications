@@ -154,7 +154,7 @@ import React, {
 
         {/* start with making the x axis */}
         <g transform={`translate(0, ${sizes.height})`}>
-        <line x1={900} transform={`translate(0, ${-100})`} stroke="lightblue" />
+        <line x1={900} transform={`translate(0, ${-100})`} stroke="royalblue" />
 
         {/* I map the labels and then render them in the HTML */}
         {x.domain().map( d =>
@@ -174,24 +174,39 @@ import React, {
         )}
         </g>
         
-        {/* render the y axis */}
+        {/* render the y axis stroke */}
         <g>
-        <line y2={500} stroke="lightblue" />
+        <line y2={500} stroke="royalblue" />
+
+        {/* create upper tick of y axis  */}
+        <line   x2={-6}
+                stroke='royalblue'
+                y={0}
+        ></line>
 
         {/* mapping the labels */}
-        {y.ticks().map(tickValue => (
-          <text
-            key={tickValue}
-            style={{ textAnchor: 'end' }}
-            fill={'white'}
-
-            //setting the position of the ticks
-            y={y(tickValue) + 5}
-            x={-10}
-          >
+        {y.ticks(10).map(tickValue => (
+            <g>
+                {/* create ticks of y axis */}
+                <line x2={-6}
+                    stroke='royalblue'
+                    y={y(tickValue) + 5}
+                    transform={`translate(0, ${y(tickValue)})`}
+                ></line>
+                {/* create text labels */}
+                <text
+                    key={tickValue}
+                    style={{ textAnchor: 'end' }}
+                    fill={'white'}
+                    fontSize={10}
+                    //setting the position of the ticks
+                    y={y(tickValue) + 5}
+                    x={-15}
+                >
             {/* show the data in HTML */}
             {tickValue}
           </text>
+          </g>
         ))}
         </g>     
 

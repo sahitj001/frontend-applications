@@ -52,7 +52,6 @@ useEffect(() => {
         </div>
         <BarChart data={data}  selectedChoice={choice}/>
         <ReactBarChart data={data}  selectedChoice={choice}/>     
-
         <References />
     </div>
     
