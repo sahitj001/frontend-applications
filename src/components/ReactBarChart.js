@@ -30,9 +30,9 @@ import React, {
   
 
   export function ReactBarChart(props) { 
-    let [hoverCap, setHoverCap] = useState('Hover over a bar!')
-    let [hoverProv, setHoverProv] = useState('Hover over a bar!')
-    let [selectedData, setSelectedData] = useState([])
+    const [hoverCap, setHoverCap] = useState('Hover over a bar!')
+    const [hoverProv, setHoverProv] = useState('Hover over a bar!')
+    const [selectedData, setSelectedData] = useState([])
 
     const x = d3.scaleBand()
     .domain(selectedData.map(province => province.key))
@@ -65,6 +65,7 @@ import React, {
     console.log('The array has', props.data.length, 'elements')
     console.log('selected choice is:', selectedChoice);
     console.log('the data', data)
+
     useEffect(() => {
       if(data.length) {
         checkState()
@@ -139,8 +140,9 @@ import React, {
     return ( <div className = "react-chart">
         <div className = "chart-info" >
         <h1 className= 'react-chart-title' >Rendering the data with React! ⚛</h1>
-        <p className = "bar-p" > Province: <span id = "province" > {hoverCap}</span></p >
-        <p className = "bar-p" > Capacity: <span id = "capacity" > {hoverProv} </span></p >
+        
+        <p className = "bar-p" > Province: <span> {hoverCap}</span></p >
+        <p className = "bar-p" > Capacity: <span> {hoverProv} </span></p >
         </div> 
         
         <h3 className = "infoCap" > Capacity </h3> 

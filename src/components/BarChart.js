@@ -269,7 +269,7 @@ export function BarChart(props) {
 
   return ( <div className = "chart">
       <div className = "chart-info" >
-      <h1> Rendering the bar with D3! 📊</h1>
+      <h1 className='d3-chart-title'> Rendering the bar with D3! 📊</h1>
       <p className = "bar-p" > Province: <span id = "province" > Hover over a bar! </span></p >
       <p className = "bar-p" > Capacity: <span id = "capacity" > Hover over a bar! </span></p >
       </div> <h3 className = "infoCap" > Capacity </h3> 
