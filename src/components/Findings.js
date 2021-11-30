@@ -5,15 +5,22 @@ export function Findings() {
     return(
         <div className="container-findings">
 
-            <h1 className="header-findings">Interesting findings</h1>
+            <h1 className="header-findings">Findings</h1>
+
+            <section className="section3">
 
             <div className="finding1">
+                <div className="findingText">
                 <h2 className="info-h2">The top 4 cities have almost the same average parking capacity... why is that?</h2>
                 <p className="info-p">According to a report of the Ministerie van 
                 Infrastructuur en Waterstaat, I found that it is optimal to have around the 300 parking spots per parking garage in each capital city of Groningen, Flevoland, Zuid-holland and Noord-holland.</p>
+                </div>
             </div>
 
+            
+
             <div className="finding2">
+            <div className="findingText">
                 <h2 className="info-h2">
     Zuid-Holland has the most total parking spots per province by a large margin. But if you look at the average, you notice that it contains about as much average parking capacity as Flevoland, Noord-Holland and Groningen. Is there a specific reason for that?
 </h2>
@@ -25,8 +32,10 @@ export function Findings() {
                     Because of such a low demand of parking garages, many projects are delayed or completely canceled. The main reason for this is that every project has to adhere to the parking norms. 
                     Building these garages isn't profitable for the investors.
                 </p>
+                </div>
             </div>
-            
+
+            </section>
         </div>
     )
 }

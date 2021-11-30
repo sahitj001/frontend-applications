@@ -3,7 +3,7 @@ import '../style/Header.css'
 export function Header() {
 
     return(
-        <div className="container">
+        <div className="container-header">
 
             <div className="header">
             <h1>Is there a connection between the number of parking spots and province?</h1>

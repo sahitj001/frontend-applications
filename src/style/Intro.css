@@ -2,38 +2,99 @@
     background-color: #faf8ff;
     height:40rem;
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .info-concept{
-    margin-top:5em;
+    display:flex;
+    flex-direction: column;
     position: relative;
-    width: 100%;
-    max-width:600px;
-    left:3%;
-    background-color: #333333;
-    padding: 1em 2em 1em 2em;
-    border-radius: 10px 25px 10px 25px;
+    width: 36.7rem;
+    height: 24.25rem;
+    justify-content: center;
+}
+
+.info-concept h2{
+    color:#111111;
+}
+
+.info-concept p{
+    color:#111111;
+}
+
+.section1{
+    width:100vw;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.section2{
+    width:100vw;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
 }
 
 .info-dataset{
-    margin-top: 3em;
+    background-color: #616161;
+    display:flex;
+    flex-direction: column;
     position: relative;
-    width: 100%;
-    max-width:600px;
-    left:60%;
-    
-    background-color: #333333;
-    padding: 1em 2em 1em 2em;
-    border-radius: 10px 25px 10px 25px;
+    width: 50%;
+    height: 24.25rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-dataset p{
+color: white;
+}
+
+.info-dataset h2{
+    color: white;
+}
+
+.codeBlock{
+    position: relative;
+    background-color:#4A4857;
+    display: flex;
+    width: 50vw;
+    height: 24.25rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.codePhoto{
+    display: flex;
+    height:8.31rem;
+}
+
+.volkskrant{
+    position: relative;
+    width:52.8rem;
+    height:8.125rem;
 }
 
 .info-h2{
-    color:#faf8ff;
+    color:#111111;
     text-align: start;
 }
 
 .info-p{
-    color:#faf8ff;
+    color:#111111;
     text-align: start;
+}
+
+.groupText{
+   display:flex;
+   flex-direction: column;
+   width: 36.7rem;
+   height: 24.25rem;
+   justify-content: center;
+   flex-wrap: wrap;
 }

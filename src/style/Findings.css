@@ -1,33 +1,62 @@
 .container-findings{
     background-color: #faf8ff;
-    height:110vh;
+    height:64rem;
     display:flex;
     flex-direction: column;
-}
-
-.finding1{
-    margin-top:2em;
-    position: relative;
-    width: 100%;
-    max-width:600px;
-    left:15em;
-    background-color: #333333;
-    padding: 1em 2em 1em 2em;
-    border-radius: 25px 10px 25px 10px;
-}
-
-.finding2{
-    margin-top:2em;
-    position: relative;
-    width: 100%;
-    max-width:600px;
-    left:65em;
-    background-color: #333333;
-    padding: 1em 2em 1em 2em;
-    border-radius: 25px 10px 25px 10px;
+    align-items: center;
 }
 
 .header-findings{
-    margin-top:3em;
-    color:#333333;
+    display: flex;
+    margin-top:6.25em;
+    margin-bottom: 5rem;
+    color:#111111;
+} 
+
+.section3{
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+}
+
+.finding1{
+    padding-top: 6.25rem;
+    display: flex;
+    background-color: #068488;
+    position: relative;
+    width: 50vw;
+    justify-content: center;
+}
+
+.finding1 p{
+    color: white;
+}
+
+.finding1 h2{
+    color: white;
+}
+
+.finding2{
+    padding-top: 6.25rem;
+    display: flex;
+    background-color: #09ABB0;
+    position: relative;
+    width: 50%;
+    justify-content: center;
+    padding-bottom: 6.25rem;
+
+}
+
+.finding2 p{
+    color: white;
+}
+
+.finding2 h2{
+    color: white;
+}
+
+.findingText{
+    display: flex;
+    flex-direction: column;
+    width: 37.5rem;   
 }

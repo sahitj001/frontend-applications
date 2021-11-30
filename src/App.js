@@ -37,6 +37,7 @@ useEffect(() => {
   // if (data.length === 0) {
   //   getData()
   // }
+  console.log('fetching data..')
 }, [])
 
   return (
@@ -52,7 +53,7 @@ useEffect(() => {
           ))}
         </select>
         </div>
-        <BarChart data={data}  selectedChoice={choice}/>
+        {/* <BarChart data={data}  selectedChoice={choice}/> */}
         <ReactBarChart data={data}  selectedChoice={choice}/>     
         <References />
     </div>
