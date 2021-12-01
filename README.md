@@ -17,7 +17,7 @@ We are going to deliver an interactive data visualization. We must have a good t
 
 > **Is there a connection between the number of parking spots and province?**
 
-![product video](https://i.imgur.com/qZEpcf4.mp4)
+![product video](img/product-showcase.mov)
 
 We are going to take a look at three views on my bar chart:
 
