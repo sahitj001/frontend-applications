@@ -1,6 +1,5 @@
 g > text {
     color:#faf8ff;
-    /* margin: 1em; */
 }
 
 .bar-p{
@@ -33,7 +32,6 @@ g > text {
     position: absolute;
     color:#faf8ff;
     left: -3em;
-    /* top: 325vh; */
     transform: rotate(270deg) translate(-350%, 1500%);
 }
 

@@ -9,7 +9,7 @@ import React, {
   //this very long video from Curran Kelleher: https://www.youtube.com/watch?v=2LhoCfjm8R4
   //also got some inspiration from this datavisualisation: https://vizhub.com/curran/b9069ad0a02c4ab5b29f0b8dcb447396?edit=files&file=index.js
   //BIG SHOUTOUT TO SUWI FOR HELPING MY OUT WITH MY RENDER ISSUES in my somewhat more D3 version combined with React!
-
+  //http://www.d3noob.org/2014/02/grouping-and-summing-data-using-d3nest.html for transforming the data
 
   // margins for axes
   const margin = {
@@ -140,7 +140,7 @@ import React, {
     return ( <div className = "react-chart">
         <div className = "chart-info" >
         <h1 className= 'react-chart-title' >Rendering the data with React! ⚛</h1>
-        
+
         <p className = "bar-p" > Province: <span> {hoverCap}</span></p >
         <p className = "bar-p" > Capacity: <span> {hoverProv} </span></p >
         </div> 

@@ -23,7 +23,7 @@ export function Intro() {
 
 <section className="section2"> 
              <div className="codeBlock">
-            <img className="codePhoto" src={textJson}></img>
+            <img className="codePhoto" alt="screenshot of my json object" src={textJson}></img>
 
             </div>
             
