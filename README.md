@@ -1,5 +1,5 @@
 # 💻 Frontend-applications
-For this course I will learn how to create visualisations from external data. This data will then be visualized in D3. The website will be made with React.
+For this course I will learn how to create visualisations from external data. This data will then be visualized in D3. This visualization will then be rendered through a Javascript framework: React.
 
 ## 📩 Debriefing
 ![test](img/vk.png)
