@@ -21,20 +21,19 @@ export function Intro() {
 
         </section>
 
-<section className="section2"> 
-             <div className="codeBlock">
-            <img className="codePhoto" alt="screenshot of my json object" src={textJson}></img>
+            <section className="section2"> 
 
-            </div>
-            
-
-            <div className="info-dataset">
-                <div className="groupText">
-                    <h2 className="info-h2">What data did I use?</h2>
-                    <p className="info-p">By using the data from RDW I was able to make a datavisualisation. I used the location and parking capacity of each garage. I transformed
-                    this data in a bar chart which you can switch from three views: Average capacity of parking spots per province, total parking spots per province and you will be able to see how much parking capacity the biggest garage has of each province.</p>
+                <div className="codeBlock">
+                    <img className="codePhoto" alt="screenshot of my json object" src={textJson}></img>
                 </div>
-            </div>
+            
+                <div className="info-dataset">
+                    <div className="groupText">
+                        <h2 className="info-h2">What data did I use?</h2>
+                        <p className="info-p">By using the data from RDW I was able to make a datavisualisation. I used the location and parking capacity of each garage. I transformed
+                        this data in a bar chart which you can switch from three views: Average capacity of parking spots per province, total parking spots per province and you will be able to see how much parking capacity the biggest garage has of each province.</p>
+                    </div>
+                </div>
             </section>
         </div>
     )
