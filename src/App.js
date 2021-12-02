@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import * as d3 from "d3"
-import { BarChart } from './components/BarChart'
 import { ReactBarChart } from './components/ReactBarChart'
-// import { BarChart4 } from './components/BarChart4'
-// import { BarChart5 } from './components/BarChart5'
 import { References } from './components/References'
 import { Header } from './components/Header'
 import { Intro } from './components/Intro'
@@ -19,7 +16,7 @@ const url = 'https://gist.githubusercontent.com/sahitj001/26850a99179af9f089a879
 
 const [data, setData] = useState([])
 const [choice, setChoice] = useState("total")
-console.log(choice)
+
 useEffect(() => {
   // fetching the data from github
   const getData = async () => {
@@ -27,17 +24,11 @@ useEffect(() => {
       const data = await d3.json(url)
       setData(data)
     } catch (error) {
-      console.log(error)
     }
   }
 
   getData()
-  // // when component has been mounted, useEffect will run once. Although, every time there is a change on the page, useEffect will run once more and then also keep fetching data.
-  // // the if statement is here so that useEffect won't keep re-fetching the data from github
-  // if (data.length === 0) {
-  //   getData()
-  // }
-  console.log('fetching data..')
+
 }, [])
 
   return (
@@ -52,8 +43,7 @@ useEffect(() => {
             <option key={choice.value} value={choice.value}>{choice.name}</option>
           ))}
         </select>
-        </div>
-        {/* <BarChart data={data}  selectedChoice={choice}/> */}
+      </div>
         <ReactBarChart data={data}  selectedChoice={choice}/>     
         <References />
     </div>

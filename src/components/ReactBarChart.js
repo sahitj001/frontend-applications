@@ -1,8 +1,8 @@
 import React, {
     useEffect, useState
-  } from "react";
-  import * as d3 from "d3";
-  import * as d3collection from "d3-collection";
+  } from "react"
+  import * as d3 from "d3"
+  import * as d3collection from "d3-collection"
   import '../style/ReactBarChart.css'
   
   //main resources I have been using
@@ -24,14 +24,15 @@ import React, {
     height: 600,
   }
 
+  const hoverText = 'Hover over a bar!'
 
-  const innerHeight = sizes.height - margin.top - margin.bottom;
-  const innerWidth = sizes.width - margin.left - margin.right;    
+  const innerHeight = sizes.height - margin.top - margin.bottom
+  const innerWidth = sizes.width - margin.left - margin.right
   
 
   export function ReactBarChart(props) { 
-    const [hoverCap, setHoverCap] = useState('Hover over a bar!')
-    const [hoverProv, setHoverProv] = useState('Hover over a bar!')
+    const [hoverCap, setHoverCap] = useState(hoverText)
+    const [hoverProv, setHoverProv] = useState(hoverText)
     const [selectedData, setSelectedData] = useState([])
 
     const x = d3.scaleBand()
@@ -44,8 +45,6 @@ import React, {
     .range([innerHeight, 0])
     
     function overBar(e){
-        // console.log("going over: ", e, val)
-        console.log("checking for value: ", e.target)
         const currentHoverValue = e.target.getAttribute('value')
         const currentHoverKey = e.target.getAttribute('province')
         e.target.setAttribute("fill", 'orange')
@@ -61,10 +60,7 @@ import React, {
     const {
       data,
       selectedChoice
-    } = props;
-    console.log('The array has', props.data.length, 'elements')
-    console.log('selected choice is:', selectedChoice);
-    console.log('the data', data)
+    } = props
 
     useEffect(() => {
       if(data.length) {
@@ -73,7 +69,7 @@ import React, {
     }, [data, selectedChoice])
   
     if (!data) {
-      return <h1>HERE{JSON.stringify(data)}</h1>;
+      return <h1>HERE{JSON.stringify(data)}</h1>
     }
   
     function totalPerProvince() {
@@ -115,15 +111,14 @@ import React, {
           return d3.max(d.filter(d => d.province === d.province), d => d.capacity)
         }).entries(data)
         .sort((a, b) => d3.descending(a.value, b.value))
-      console.log(highest)
       return highest
     }
   
     function checkState() {
       //when the state of the dropdown changes, the bar will render something different
       //drawFunction is a dynamic variable which means it contains a different function depending on the state of the dropdown 
-      //totalPerProvince, averagePerProvince and highestPerProvince transform the fetched data and immediately update the bars.
-      let drawFunction;
+      //totalPerProvince, averagePerProvince and highestPerProvince transform the fetched data and return this.
+      let drawFunction
       if (selectedChoice === 'total') {
         drawFunction = totalPerProvince
       }

@@ -11,3 +11,59 @@ rect{
 .react-chart-title{
     color:white;
 }
+
+g > text {
+    color:#faf8ff;
+}
+
+.bar-p{
+    margin: 0.5em;
+    color:#faf8ff;
+}
+
+.bar-h2{
+    color:#faf8ff;
+}
+
+.chart{
+    background-color:#333333;
+}
+
+.chart-info{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+ 
+}
+.tick > text{
+    font-size:1em;
+    color:white;
+
+}
+
+.infoCap{
+    position: absolute;
+    color:#faf8ff;
+    left: -3em;
+    transform: rotate(270deg) translate(-350%, 1500%);
+}
+
+.infoProv{
+    position: absolute;
+    color:#faf8ff;
+    transform: translate(1750%, 2250%);
+}
+
+.xAxis{
+    color:royalblue;
+}
+.yAxis{
+    color:royalblue;
+}
+
+.d3-chart-title{
+    color:white;
+}
+
+
