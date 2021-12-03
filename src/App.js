@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import * as d3 from "d3"
 import { ReactBarChart } from './components/ReactBarChart'
+// import { BarChart } from './components/BarChart'
 import { References } from './components/References'
 import { Header } from './components/Header'
 import { Intro } from './components/Intro'

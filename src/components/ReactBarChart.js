@@ -52,9 +52,9 @@ import React, {
         setHoverProv(currentHoverKey)
       }
 
-      function leaveBar(e){
-          e.target.setAttribute('fill', 'white')
-      }
+    function leaveBar(e){
+        e.target.setAttribute('fill', 'white')
+    }
  
     //because I already gave my data array as a prop, I can use it here directly for my d3 bar chart
     const {
@@ -146,83 +146,83 @@ import React, {
         {/* we will work in the svg element, we start by giving it a size */}
         <svg width={1200} height={600}>
         
-        {/* the next step is to create a group element with margin so that we can show our axes */}
-        <g transform={`translate(${150},${margin.top})`}>
+          {/* the next step is to create a group element with margin so that we can show our axes */}
+          <g transform={`translate(${150},${margin.top})`}>
 
-        {/* start with making the x axis */}
-        <g transform={`translate(0, ${sizes.height})`}>
-        <line x1={900} transform={`translate(0, ${-100})`} stroke="royalblue" />
+            {/* start with making the x axis */}
+            <g transform={`translate(0, ${sizes.height})`}>
+              <line x1={900} transform={`translate(0, ${-100})`} stroke="royalblue" />
 
-        {/* I map the labels and then render them in the HTML */}
-        {x.domain().map( d =>
-            <text
-            style={{ textAnchor: 'middle' }}
-            fontSize={10}
-            fill={'white'}
+              {/* I map the labels and then render them in the HTML */}
+              {x.domain().map( d =>
+                <text
+                style={{ textAnchor: 'middle' }}
+                fontSize={10}
+                fill={'white'}
 
-            // set positioning of each label, might look a bit crooked but hey couldn't find another way ¯\_(ツ)_/¯
-            x={x(d) + 30}
-            y="-80px"
-            >
+                // set positioning of each label, might look a bit crooked but hey couldn't find another way ¯\_(ツ)_/¯
+                x={x(d) + 30}
+                y="-80px"
+                >
 
-            {/* show the data in the HTML */}
-            {d}
-            </text>
-        )}
-        </g>
+                {/* show the data in the HTML */}
+                {d}
+                </text>
+              )}
+              
+            </g>
         
-        {/* render the y axis stroke */}
-        <g>
-        <line y2={506} stroke="royalblue" />
+          {/* render the y axis stroke */}
+          <g>
+            <line y2={506} stroke="royalblue" />
 
-        {/* create upper tick of y axis  */}
-        <line   
-            x2={-6}
-            stroke='royalblue'
-        />
+            {/* create upper tick of y axis  */}
+            <line   
+              x2={-6}
+              stroke='royalblue'
+            />
 
-        {/* mapping the labels */}
-        {y.ticks(10).map(tickValue => (
-            <g>
+            {/* mapping the labels */}
+            {y.ticks(10).map(tickValue => (
+              <g>
                 {/* create ticks of y axis */}
                 <line x2={-6}
-                    stroke='royalblue'
-                    y={y(tickValue) + 5}
-                    transform={`translate(0, ${y(tickValue)})`}
+                  stroke='royalblue'
+                  y={y(tickValue) + 5}
+                  transform={`translate(0, ${y(tickValue)})`}
                 ></line>
-                {/* create text labels */}
+                  {/* create text labels */}
                 <text
-                    key={tickValue}
-                    style={{ textAnchor: 'end' }}
-                    fill={'white'}
-                    fontSize={10}
-                    //setting the position of the ticks
-                    y={y(tickValue) + 5}
-                    x={-8}
+                  style={{ textAnchor: 'end' }}
+                  fill={'white'}
+                  fontSize={10}
+                  //setting the position of the ticks
+                  y={y(tickValue) + 5}
+                  x={-8}
                 >
-            {/* show the data in HTML */}
-            {tickValue}
-          </text>
-          </g>
-        ))}
-        </g>     
+                  {/* show the data in HTML */}
+                  {tickValue}
+                </text>
+              </g>
+            ))}
+          </g>     
 
          {/* render the bars */}
           {selectedData.map(d => <rect 
-          x={x(d.key)} 
-          y={y(d.value)} 
-          width={x.bandwidth()} 
-          height={500 - y(d.value)} 
-          fill={"white"}
-          value={d.value}
-          province={d.key} 
-          onMouseOver={overBar}
-          onMouseLeave={leaveBar}
-           />)} 
-           </g>
+            x={x(d.key)} 
+            y={y(d.value)} 
+            width={x.bandwidth()} 
+            height={500 - y(d.value)} 
+            fill={"white"}
+            value={d.value}
+            province={d.key} 
+            onMouseOver={overBar}
+            onMouseLeave={leaveBar}
+          />)} 
+        </g>
 
         </svg> 
 
-        </div>
+      </div>
     )
   }
